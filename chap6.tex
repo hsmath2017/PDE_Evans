@@ -1,0 +1,157 @@
+\chapter{Elliptic equation}
+In this chapter, we will discuss on the general elliptic PDEs and its weak form. We will exploit two essentially distinct techniques, energy methods within Sobolev spaces and maximum principle methods.
+\section{Definition}
+\subsection{Elliptic equations}
+We will in this chapter mostly study the boundary value problem(BVP):
+\begin{equation}
+    \label{eq:Elliptic_eq}
+    \left\{
+        \begin{aligned}
+            Lu&=f\text{ in }U;\\
+            u&=0\text{ on }\partial U,\\
+        \end{aligned}
+    \right.
+\end{equation} 
+where $U$ is an open, bounded subset of $\mathbb{R}^{n}$, and $u:\bar{U}\rightarrow\mathbb{R}$ is the unknown. Here $f$ is given, and $L$ denotes a second order differential operator have either the form:
+\begin{equation}
+    \label{eq:div-form_ellip}
+    Lu=-\sum_{i,j=1}^{n}\left(a^{ij}(x)u_{x_{i}}\right)_{x_{j}}+\sum_{i=1}^{n}b^{i}(x)u_{x_{i}}+c(x)u
+\end{equation}
+or else 
+\begin{equation}
+    \label{eq:non_div-form_ellip}
+    Lu=-\sum_{i,j=1}^{n}a^{ij}(x)u_{x_{i}x_{j}}+\sum_{i=1}^{n}b^{i}(x)u_{x_{i}}+c(x)u.
+\end{equation}
+The form \eqref{eq:div-form_ellip} is in \textbf{divergence form}, while the form \eqref{eq:non_div-form_ellip} is in \textbf{non-divergence form}. The requirement that $u=0$ on $\partial\Omega$ is called \textbf{Dirichlet's boundary condition}.
+
+\begin{remark}
+    \begin{itemize}
+        \item Different with Evans chapter 2, $u\in C^{2}(U)$ is unnecessary. So we should discuss on the weak form of equation \eqref{eq:Elliptic_eq}.
+        \item If $a^{ij}\in C^{2}(U)$, the form \eqref{eq:div-form_ellip} and \eqref{eq:non_div-form_ellip} are equivalent in general. But the form \eqref{eq:div-form_ellip} is more natural for energy methods, and the form \eqref{eq:non_div-form_ellip} is more appropriate for maximum principle techniques.
+        \item Assumption: \textbf{symmetry condition}
+        \begin{equation*}
+            \label{eq:symmetry_cond}
+            a^{ij}=a^{ji}.
+        \end{equation*}
+    \end{itemize}
+\end{remark}
+Now, give an important property of the differential operator $L$.
+\begin{definition}
+    \label{defn:uniformly_elliptic}
+    We say the partial differential operator $L$ is (uniformly) elliptic if there exists a constant $\theta>0$ such that
+    \begin{equation}
+        \sum_{i,j=1}^{n}a^{ij}(x)\xi_{i}\xi_{j}\ge\theta |\xi|^{2}
+    \end{equation}
+    for a.e. $x\in U$ and all $\xi\in\mathbb{R}^{n}$.
+\end{definition}
+
+\begin{remark}
+    \begin{itemize}
+        \item $L$ is uniformly elliptic means the matrix $(a^{ij}(x))$ is positive definite $\forall x\in U$.
+        \item The converse proposition of the above proposition isn't true.
+        \item Special case: $a^{ij}(x)\equiv\delta_{ij}, b^{i}\equiv 0, c^{i}\equiv 0$. In this case, the equation \eqref{eq:Elliptic_eq} is the \textbf{Poisson equation}.
+    \end{itemize}
+\end{remark}
+\subsection{Weak solutions}
+\textbf{Motivation:}In general case, we can only assume that 
+\begin{equation}
+    \label{eq:assumption_for_ellip}
+    a^{ij},b^{i},c\in L^{\infty}(U),f\in L^{2}(U).
+\end{equation} 
+In this case, maybe we can't find $u\in C^{2}(U)$ such that $u$ satisfies \eqref{eq:Elliptic_eq}, so we try to derive the \textbf{weak form} of the solution $u$, such that $u\in H_{0}^{1}(U)$. In practise, choose \textbf{test function} $v\in C_{c}^{\infty}(U)$, then define the linear functional 
+\begin{equation}
+    \label{eq:functional_of_u}
+    u^{*}(v):=\int_{U}uv\dif x.
+\end{equation}
+Then consider the dual form of \eqref{eq:Elliptic_eq}, i.e. 
+\begin{equation}
+    \label{eq:dual_form}
+    (Lu)^{*}(v)=f^{*}(v)\text{ }\forall v\in C_{c}^{\infty}(U).
+\end{equation}
+It's just the \textbf{weak form} of equation \eqref{eq:Elliptic_eq}. In this section, we choose the \textbf{divergence form} of operator $L$.
+\begin{theorem}
+    The weak form of equation \eqref{eq:Elliptic_eq} is 
+    \begin{equation}
+        \label{eq:weak_form}
+        \int_{U}\sum_{i,j=1}^{n}a^{ij}u_{x_{i}}v_{x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}v+cuv\dif x=\int_{U}fv\dif x.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    It's suffices to derive the expression of $\int_{U}vLu\dif x$. By Gauss-Green formula, for a vector field $F\in C^{1}(\mathbb{R}^{n})$, we can see:
+    \begin{equation}
+        \label{eq:Gauss-Green}
+        \int_{U}v\nabla\cdot F\dif x=\int_{\partial U}v F\cdot n\dif S(x)-\int_{U}F\cdot\nabla v\dif x.
+    \end{equation}
+    Choose the vector field $F=\begin{bmatrix}
+        \sum a^{i1}(x)u_{x_{i}}\\
+        \sum a^{i2}(x)u_{x_{i}}\\
+        \vdots\\
+        \sum a^{in}(x)u_{x_{i}}\\
+    \end{bmatrix}$, as $v=0$ on $\partial \Omega$, by \eqref{eq:Gauss-Green}, we can see:
+    \begin{equation}
+        \begin{aligned}
+            \int_{U}\sum_{i,j=1}^{n}\left(a^{ij}(x)u_{x_{i}}\right)_{x_{j}}v\dif x&=\int_{U}v\nabla\cdot F\dif x\\
+            &=-\int_{U}F\cdot\nabla v\dif x\\
+            &=-\int_{U}\sum_{i,j=1}^{n}a^{ij}u_{x_{i}}v_{x_{j}}\dif x.\\
+        \end{aligned}
+    \end{equation}
+    Then:
+    \begin{equation}
+        \label{eq:weak}
+        \int_{U}vLu\dif x=\int_{U}\sum_{i,j=1}^{n}a^{ij}u_{x_{i}}v_{x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}v+cuv\dif x=\int_{U}vf\dif x=f^{*}(v).
+    \end{equation}
+\end{proof}
+By \eqref{eq:weak_form}, we can derive the following definitions.
+\begin{definition}
+    \begin{enumerate}
+        \item The bilinear form $B[\;,\;]$ associated with the divergence form elliptic operator defined by \eqref{eq:div-form_ellip} is:
+        \begin{equation}
+            \label{eq:bilinear_form_B}
+            B[u,v]:=\int_{U}\sum_{i,j=1}^{n}a^{ij}u_{x_{i}}v_{x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}v
+        \end{equation}
+        for $u,v\in H_{0}^{1}(U)$.
+        \item We say that $u\in H_{0}^{1}(U)$ is a weak solution of the BVP \eqref{eq:Elliptic_eq} if 
+        \begin{equation}
+            B[u,v]=(f,v)
+        \end{equation}
+        for all $v\in H_{0}^{1}(U)$, where $(\;,\;)$ denotes the inner product in $L^{2}(U)$.
+    \end{enumerate}
+\end{definition}
+
+More generally, let us consider the BVP 
+\begin{equation}
+    \label{eq:revised_BVP}
+    \left\{
+        \begin{aligned}
+            Lu&=f^{0}-\sum_{i=1}^{n}f_{x_{i}}^{i},x\in U,\\
+            u&=0,x\in\partial U,
+        \end{aligned}
+    \right.
+\end{equation}
+where $f^{i}\in L^{2}(U)$. Then we say $u\in H_{0}^{1}(U)$ is a weak solution of problem \eqref{eq:revised_BVP} if 
+\begin{equation}
+    B[u,v]=\innerprod{f}{v}
+\end{equation}
+for all $v\in H_{0}^{1}(U)$, where $\innerprod{\cdot}{\cdot}$ is the pairing of $H^{-1}(U)$ and $H_{0}^{1}(U)$.
+
+For non-homogeneous elliptic PDE, i.e.
+\begin{equation}
+    \label{eq:nonhomo}
+    \left\{
+        \begin{aligned}
+            Lu&=f,x\in U,\\
+            u&=g,x\in \partial U.\\
+        \end{aligned}
+    \right.
+\end{equation}
+By trace theorem, $\exists w\in H^{1}(U)$ such that the trace of $w$ is $g$. Then define $\tilde{u}:=u-w$, \eqref{eq:nonhomo} is equivalent to the equation:
+\begin{equation}
+    \label{eq:change_to_homogeneous}
+    \left\{
+        \begin{aligned}
+            L\tilde{u}&=\tilde{f},x\in U,\\
+            \tilde{u}&=0,x\in\partial U,\\
+        \end{aligned}
+    \right.
+\end{equation}
+where $\tilde{f}:=f-Lw\in H^{-1}(U)$.

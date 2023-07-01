@@ -1,0 +1,33 @@
+\documentclass[11pt]{elegantbook}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\innerprod}[2]{\left<#1,#2\right>}
+\title{A brief note for Evans PDE chapter 5-7}
+
+\author{Shuang Hu}
+\institute{Zhejiang University}
+\date{July 1st 2023}
+\version{1.0}
+\bioinfo{Bio}{Information}
+
+\logo{logo-blue.png}
+\cover{cover.jpg}
+
+% modify the color in the middle of titlepage
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+\usepackage{cprotect}
+
+\addbibresource[location=local]{reference.bib} % bib
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+\tableofcontents
+
+\mainmatter
+
+\input{chap6.tex}
+
+\end{document}
