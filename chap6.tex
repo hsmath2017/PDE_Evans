@@ -155,3 +155,96 @@ By trace theorem, $\exists w\in H^{1}(U)$ such that the trace of $w$ is $g$. The
     \right.
 \end{equation}
 where $\tilde{f}:=f-Lw\in H^{-1}(U)$.
+\section{Existence of weak solutions}
+\subsection{Lax-Milgram theorem}
+We now introduce an abstract principle from linear functional analysis. 
+
+Assume $H$ is a real Hilbert space, with norm $\|\;\|$ and inner product $(\;,\;)$. We let $\innerprod{\cdot}{\cdot}$ denote the pairing of $H$ with its dual space.
+\begin{theorem}{Lax-Milgram Theorem}
+    \label{thm:Lax-Milgram}
+    Assume that 
+    \begin{equation}
+        \label{eq:bilinear_form_B}
+        B:H\times H\rightarrow\mathbb{R}
+    \end{equation}
+    is a bilinear mapping, for which there exist constants $\alpha,\beta$ such that 
+    \begin{equation}
+        \label{eq:bounded}
+        |B(u,v)|\le \alpha \norm{u}\norm{v}(u,v\in H)
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:elliptic}
+        \beta\norm{u}^{2}\le B[u,u](u\in H).
+    \end{equation}
+    Finally, let $f:H\rightarrow R$ be a bounded linear functional on $H$.
+
+    Then there exists a unique element $u\in H$ such that 
+    \begin{equation}
+        \label{eq:Lax-Milgram}
+        B[u,v]=\innerprod{f}{v}
+    \end{equation}
+    for all $v\in H$.
+\end{theorem}
+\begin{remark}
+    \begin{enumerate}
+        \item If $B$ is symmetry, the condition \eqref{eq:bounded} and \eqref{eq:elliptic} means $B$ can derive an inner product on $H$.
+        \item So, if $B$ is symmetry, theorem \ref{thm:Lax-Milgram} is a direct corollary of Riesz representation theorem.
+        \item If $B$ isn't symmetry, Riesz representation theorem can transform $f\in H^{*}$ to $u_{f}\in H$, such that $\innerprod{f}{v}=(u_{f},v)$.
+        \item So, we should show that $\forall u_{f}\in H$, $\exists u\in H$ such that $B[u,v]=(u_{f},v)$ for each $v\in H$.
+    \end{enumerate}
+\end{remark}
+\begin{proof}
+
+    By the remark above, we just need to show that $\forall u_{f}\in H$, $\exists u\in H$ such that $B[u,v]=(u_{f},v)$ for each $v\in H$.
+
+    Consider an element $u\in H$. $B(u,v)$ is a bounded bilinear mapping, so the map 
+    \begin{equation}
+        \label{eq:Bu}
+        B_{u}(v):=B[u,v]
+    \end{equation}
+    is a bounded linear functional. By Riesz representation theorem, $\exists !\tilde{u}\in H$ such that $B[u,v]=(\tilde{u},v)$ $\forall v\in H$. So we can define a map $A:H\rightarrow H$ maps $u$ to $\tilde{u}$.
+    
+    Then it's suffices to show that $A$ is a bounded linear isomorphism.
+
+    First we should show that $A$ is linear. $\forall v\in H$, $\lambda_{1},\lambda_{2}\in\mathbb{R}$, $u_{1},u_{2}\in H$, we can see:
+    \begin{equation}
+        \label{eq:linear_A}
+        \begin{aligned}
+        (A(\lambda_{1}u_{1}+\lambda_{2}u_{2}),v)&=B[\lambda_{1}u_{1}+\lambda_{2}u_{2},v]\\
+        &=\lambda_{1}B[u_{1},v]+\lambda_{2}B[u_{2},v]\\
+        &=\lambda_{1}(Au_{1},v)+\lambda_{2}(Au_{2},v).
+        \end{aligned}
+    \end{equation}
+    \eqref{eq:linear_A} shows that $A$ is a linear map. 
+
+    Then we show that $A$ is bounded. As $B$ is bounded, we can see:
+    \begin{equation}
+        \label{eq:Bounded_A}
+        \begin{aligned}
+        \norm{Au}^{2}&=(Au,Au)\\
+        &=B[u,Au]\\
+        &\le \alpha \norm{u}\norm{Au}.
+        \end{aligned}
+    \end{equation}
+    i.e. $\norm{Au}\le\alpha\norm{u}$. So $A$ is bounded.
+
+    The next thing to do in the proof is to show $A$ is an injective. By \eqref{eq:elliptic}, we can see:
+    \begin{equation}
+        \label{eq:injective_A}
+        \begin{aligned}
+        \beta\norm{u}^{2}&\le B[u,u]\\
+        &=(Au,u)\\
+        &\le \norm{Au}\norm{u}.
+        \end{aligned}
+    \end{equation}
+    i.e. $\beta\norm{u}\le\norm{Au}$. So $\beta\norm{u}\le \norm{Au}\le\alpha\norm{u}$, it means that $A$ is an injective. What's more, the range of $A$, marked as $R(A)$, is a closed set.
+    
+    Finally, we should show that $A$ is a surjective. If $R(A)\neq H$, since $R(A)$ is closed, there exists a nonzero element  $\omega\in H$ with $\omega\in R(A)^{\bot}$. Then: 
+    \begin{equation}
+        \beta\norm{\omega}^{2}\le B[\omega,\omega]=(A\omega,\omega)=0.
+    \end{equation} 
+    which means that $\norm{\omega}=0$, contradict! So $A$ is a surjective.
+
+    This completes the proof of Lax-Milgram theorem.
+\end{proof}
