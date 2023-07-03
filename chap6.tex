@@ -106,7 +106,7 @@ By \eqref{eq:weak_form}, we can derive the following definitions.
     \begin{enumerate}
         \item The bilinear form $B[\;,\;]$ associated with the divergence form elliptic operator defined by \eqref{eq:div-form_ellip} is:
         \begin{equation}
-            \label{eq:bilinear_form_B}
+            \label{eq:bilinear_form_B1}
             B[u,v]:=\int_{U}\sum_{i,j=1}^{n}a^{ij}u_{x_{i}}v_{x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}v
         \end{equation}
         for $u,v\in H_{0}^{1}(U)$.
@@ -248,3 +248,135 @@ Assume $H$ is a real Hilbert space, with norm $\|\;\|$ and inner product $(\;,\;
 
     This completes the proof of Lax-Milgram theorem.
 \end{proof}
+
+Lax-Milgram theorem gives an important method for us to analyze the existence of weak solution.
+\subsection{Energy estimates and First Existence theorem}
+Now, we return to the specific bilinear form $B[\;,\;]$ defined by \eqref{eq:bilinear_form_B1}, and try to use \textbf{Lax-Milgram theorem} to prove the first existence theorem.
+\begin{theorem}{Energy estimates}
+\label{thm:energy_estimate}
+There exists constants $\alpha,\beta>0$ and $\gamma\ge 0$ such that 
+\begin{equation}
+    \label{eq:bounded_B}
+    |B[u,v]|\le\alpha\norm{u}_{H_{0}^{1}(U)}\norm{v}_{H_{0}^{1}(U)}
+\end{equation}
+and 
+\begin{equation}
+    \label{eq:elliptic_B}
+    \beta\norm{u}_{H_{0}^{1}(U)}^{2}\le B[u,u]+\gamma\norm{u}_{L^{2}(U)}^{2}.
+\end{equation}
+\end{theorem}
+\begin{proof}
+    First derive the inequality \eqref{eq:bounded_B}. According to \eqref{eq:bilinear_form_B1}, we can check that 
+    \begin{equation}
+        \label{eq:derive_energy_B}
+        \begin{aligned}
+            B[u,v]&\le\sum_{i,j=1}^{n}\int_{U}\norm{a^{ij}}_{L^{\infty}}|u_{x_{i}}||v_{x_{j}}|\dif x+\sum_{i=1}^{n}\int_{U}\norm{b^{i}}_{L^{\infty}}|u_{x_{i}}||v|\dif x+\int_{U}\norm{c}_{L^{\infty}}|u||v|\dif x\\
+            &\le\sum_{i,j=1}^{n}\int_{U}\norm{a^{ij}}_{L^{\infty}}|Du||Dv|\dif x+\sum_{i=1}^{n}\int_{U}\norm{b^{i}}_{L^{\infty}}|Du||v|\dif x+\int_{U}\norm{c}_{L^{\infty}}|u||v|\dif x\\
+            &\le\alpha\norm{u}_{H_{0}^{1}(U)}\norm{v}_{H_{0}^{1}(U)}.
+        \end{aligned}
+    \end{equation}
+    Then, by the uniformly elliptic condition of coefficient matrix $a^{ij}(x)$, we can see:
+    \begin{equation}
+        \label{eq:elliptic_for_a}
+        \begin{aligned}
+        \theta\int_{U}|Du|^{2}\dif x&\le \int_{U}\sum_{i,j=1}^{n}a^{ij}(x)u_{x_{i}}u_{x_{j}}\dif x\\
+        &=B[u,u]-\int_{U}\left(\sum_{i=1}^{n}b^{i}(x)u_{x_{i}}u\dif x+cu^{2}\right)\dif x\\
+        &\le B[u,u]+\sum_{i=1}^{n}\int_{U}\norm{b^{i}(x)}_{\Linf}|u||Du|\dif x+c\int_{U}u^{2}\dif x\\ 
+        \end{aligned}
+    \end{equation}
+    By Cauchy-Schwarz inequality with coefficient, we can see:
+    \begin{equation}
+        \label{eq:cauchy_schwarz}
+        \int_{U}|u||Du|\dif x\le\epsilon\int_{U}|Du|^{2}\dif x+\frac{1}{4\epsilon}\int_{U}|u|^{2}\dif x.
+    \end{equation}
+    Choose $\epsilon$ such that $\epsilon\sum_{i=1}^{n}\norm{b^{i}}_{L^{\infty}}<\frac{\theta}{2}$, then exists constant $C>0$ such that 
+    \begin{equation}
+        \label{eq:inequality_for_ellip}
+        \frac{\theta}{2}\int_{U}|Du|^{2}\dif x\le B[u,u]+C\int_{U}u^{2}\dif x.
+    \end{equation}
+    Finally, by Poincare-Friedrichs inequality, the equation \eqref{eq:elliptic_B} is true.
+\end{proof}
+By \eqref{eq:elliptic_B}, if $\gamma>0$, $B[u,v]$ isn't uniformly elliptic in general. So, $B[u,v]$ does't satisfy the hypotheses of Lax-Milgram theorem in general. So we should give some revisions on bilinear form $B$. Then, we derive the \textbf{first existence theorem for weak solutions.}
+\begin{theorem}{First Existence Theorem for weak solutions}
+    There is a number $\gamma\ge 0$ such that for each $\mu\ge\gamma$ and each function $f\in L^{2}(U)$, there exists a unique weak solution $u\in H_{0}^{1}(U)$ of the boundary-value problem 
+    \begin{equation}
+        \label{eq:modified_BVP}
+        \left\{
+            \begin{aligned}
+                Lu+\mu u&=f,x\in U;\\
+                u&=0,x\in\partial\Omega.\\
+            \end{aligned}
+        \right.
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Choose the parameter $\gamma$ as theorem \ref{thm:energy_estimate}, then define the bilinear form 
+    \begin{equation}
+        \label{eq:Bmu}
+        B_{\mu}[u,v]:=B[u,v]+\mu(u,v).
+    \end{equation}
+    Then the weak form of equation \eqref{eq:modified_BVP} is 
+    \begin{equation}
+        B_{\mu}[u,v]=\innerprod{f}{v}.
+    \end{equation}
+    By \eqref{eq:elliptic_B}, as $\mu\ge\gamma$, the bilinear form $B_{\mu}$ satisfies uniformly elliptic condition. So by Lax-Milgram theorem, equation \eqref{eq:Bmu} has unique weak solution.
+\end{proof}
+\begin{remark}
+    The first existence theorem for weak solutions is a milestone, but we still can't give the existence theorem of equation \eqref{eq:Elliptic_eq}. We should use Fredholm alternative theorem to derive the existence of weak solution.
+\end{remark}
+\subsection{Fredholm alternative and the solvability}
+In this section, we show the Fredholm alternative theorem first, then employ this theorem to derive the existence theorem for weak solutions.
+
+\begin{theorem}{Fredholm alternative}
+    \label{thm:Fredholm}
+    Let $K:H\rightarrow H$ be a compact linear operator, then:
+    \begin{itemize}
+        \item $\ker(I-K)$ is finite dimensional.
+        \item $R(I-K)$ is closed.
+        \item $R(I-K)=\ker(I-K^{*})^{\perp}$.
+        \item $\ker(I-K)=\{0\}$ if and only if $R(I-K)=H$.
+        \item $\dim\ker(I-K)=\dim\ker(I-K^{*})$.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+Then, derive the \textbf{dual problem} of equation \eqref{eq:Elliptic_eq}.
+\begin{definition}{Dual problem}
+    \begin{enumerate}
+        \item The operator $L^{*}$, the formal adjoint of $L$, is:
+        \begin{equation}
+            \label{eq:dual_op}
+            L^{*}v=-\sum_{i,j=1}^{n}\left(a^{ij}v_{x_{j}}\right)_{x_{i}}-\sum_{i=1}^{n}b^{i}v_{x_{i}}+(c-\sum_{i=1}^{n}b_{x_{i}}^{i})v,
+        \end{equation}
+        provided $b^{i}\in C^{1}(\bar{U})$.
+        \item The adjoint bilinear form 
+        \begin{equation}
+            \label{eq:dualB}
+            B^{*}:H_{0}^{1}(U)\times H_{0}^{1}(U)\rightarrow\mathbb{R}
+        \end{equation}
+        is defined by 
+        \begin{equation}
+            \label{eq:dual_B}
+            B^{*}[v,u]=B[u,v]
+        \end{equation}
+        for all $u,v\in H_{0}^{1}(U)$.
+        \item We say that $v\in H_{0}^{1}(U)$ is a weak solution of the adjoint problem 
+        \begin{equation}
+            \label{eq:adj_problem}
+            \left\{
+                \begin{aligned}
+                    L^{*}v&=f,x\in U;\\
+                    v&=0,x\in\partial U.
+                \end{aligned}
+            \right.
+        \end{equation}
+        provided $B^{*}[v,u]=(f,u)$ for all $u\in H_{0}^{1}(U)$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    \begin{itemize}
+        \item \eqref{eq:dual_op} is called formal adjoint, for $(Lu,v)=(u,L^{*}v)$.
+        \item \eqref{eq:adj_problem} is the dual form of equation \eqref{eq:Elliptic_eq}.
+    \end{itemize}
+\end{remark}
