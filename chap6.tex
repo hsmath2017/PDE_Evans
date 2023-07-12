@@ -298,6 +298,7 @@ and
 \end{proof}
 By \eqref{eq:elliptic_B}, if $\gamma>0$, $B[u,v]$ isn't uniformly elliptic in general. So, $B[u,v]$ does't satisfy the hypotheses of Lax-Milgram theorem in general. So we should give some revisions on bilinear form $B$. Then, we derive the \textbf{first existence theorem for weak solutions.}
 \begin{theorem}{First Existence Theorem for weak solutions}
+    \label{thm:1st_exist}
     There is a number $\gamma\ge 0$ such that for each $\mu\ge\gamma$ and each function $f\in L^{2}(U)$, there exists a unique weak solution $u\in H_{0}^{1}(U)$ of the boundary-value problem 
     \begin{equation}
         \label{eq:modified_BVP}
@@ -380,3 +381,402 @@ Then, derive the \textbf{dual problem} of equation \eqref{eq:Elliptic_eq}.
         \item \eqref{eq:adj_problem} is the dual form of equation \eqref{eq:Elliptic_eq}.
     \end{itemize}
 \end{remark}
+To show the solvability of problem \eqref{eq:Elliptic_eq}, we derive the following theorem.
+\begin{theorem}{Second Existence Theorem for weak solutions}
+    \label{thm:2nd_exist}
+    \begin{enumerate}
+        \item Precisely one of the following statements holds: either for each $f\in L^{2}(U)$ there exists a unique weak solution $u$ of the boundary value problem \eqref{eq:Elliptic_eq} (marked as $\alpha$), or else there exists a weak solution $u\neq 0$ of the homogeneous problem (marked as $\beta$) 
+        \begin{equation}
+            \label{eq:homo_prob}
+            \left\{
+                \begin{aligned}
+                    Lu&=0,x\in U;\\
+                    u&=0,x\in \partial U.
+                \end{aligned}
+            \right.
+        \end{equation}
+        \item Furthermore, should assertion $(\beta)$ hold, the dimension of the subspace $N\subset H_{0}^{1}(U)$ of weak solutions of \eqref{eq:homo_prob} is finite and equals the dimension of the subspace $N^{*}\subset H_{0}^{1}(U)$ of weak solutions of 
+        \begin{equation}
+            \label{eq:homo_dual}
+            \left\{
+                \begin{aligned}
+                    L^{*}v&=0,x\in U;\\
+                    v&=0,x\in\partial U.\\
+                \end{aligned}
+            \right.
+        \end{equation}
+        \item Finally, the BVP \eqref{eq:Elliptic_eq} has a weak solution if and only if 
+        \begin{equation}
+            (f,v)=0\;\forall v\in N^{*}.
+        \end{equation}
+    \end{enumerate}
+\end{theorem}
+\begin{remark}
+    To prove this theorem, we should try to use theorem \ref{thm:1st_exist}. The main idea is to construct a compact operator $K$, such that the weak form of \eqref{eq:Elliptic_eq} is $(I-K)u=h$, then use theorem \ref{thm:Fredholm}.
+\end{remark}
+\begin{proof}
+    First, choose $\gamma$ as theorem \ref{thm:1st_exist} suggests, then for each $g\in L^{2}(U)$, there exists a unique $u\in H_{0}^{1}(U)$ solving:
+    \begin{equation}
+        \label{eq:auxiliary_weak_form}
+        B_{\gamma}[u,v]=\innerprod{g}{v}\forall v\in H_{0}^{1}(U).
+    \end{equation}
+    Write $u=L_{\gamma}^{-1}g$ if equation \eqref{eq:auxiliary_weak_form} holds. As the weak form of \eqref{eq:Elliptic_eq} is $B[u,v]=\innerprod{f}{v}$, we can see $B_{\gamma}[u,v]=\innerprod{f+\gamma u}{v}$, i.e. $u=L_{\gamma}^{-1}(f+\gamma u)$. Then choose operator $K=\gamma L_{\gamma}^{-1}$, $h=L_{\gamma}^{-1}f$, \eqref{eq:auxiliary_weak_form} is equivalent to 
+    \begin{equation}
+        \label{eq:compact_weak_form}
+        (I-K)u=h.
+    \end{equation}
+
+    The next step is to show that $K:L^{2}(U)\rightarrow L^{2}(U)$ is a bounded, linear, compact operator. In fact, we only need to show $K$ is compact. By \eqref{eq:auxiliary_weak_form}, we can see:
+    \begin{equation}
+        \label{eq:norm_estimate}
+        \beta\norm{u}_{H_{0}^{1}(U)}^{2}\le B_{\gamma}[u,u]=\innerprod{g}{u}\le\norm{g}_{L^{2}(U)}\norm{u}_{L^{2}(U)}\le\norm{g}_{L^{2}(U)}\norm{u}_{H_{0}^{1}(U)}.
+    \end{equation}
+    By \eqref{eq:norm_estimate}, there exists a constant $C>0$ such that $\norm{Kg}_{H_{0}^{1}(U)}\le C\norm{g}_{L^{2}(U)}$. As $H_{0}^{1}(U)\subset\subset L^{2}(U)$, $K$ is a compact operator.
+
+    Then, use theorem \ref{thm:Fredholm} on equation \eqref{eq:compact_weak_form}. If $\ker(I-K)=\{0\}$, theorem \ref{thm:Fredholm} shows that $I-K$ is also a surjective, i.e. statement $(\alpha)$ is true. Otherwise, $\ker(I-K)\neq\{0\}$ means that $\exists u\in H_{0}^{1}(U)$ such that $(I-K)u=0$, i.e. $u$ satisfies equation \eqref{eq:homo_prob}. Then statement $(\beta)$ is true. If $N\neq\{0\}$, while
+    \begin{equation}\dim\ker(I-K)=\dim\ker(I-K^{*})<\infty,
+    \end{equation} we can see $\dim N=\dim N^{*}<\infty$.
+
+    Finally, if $(I-K)u=h$ has a solution, $v\in N^{*}$, we can see:
+    \begin{equation}
+        \innerprod{h}{v}=\innerprod{(I-K)u}{v}=\innerprod{u}{(I-K^{*})v}=0.
+    \end{equation}
+    By $h=L_{\gamma}^{-1}f$, we can see:
+    \begin{equation}
+        \innerprod{h}{v}=\frac{1}{\gamma}\innerprod{Kf}{v}=\frac{1}{\gamma}\innerprod{f}{K^{*}v}=\frac{1}{\gamma}\innerprod{f}{v}=0.
+    \end{equation}
+    So:$\innerprod{f}{v}=0$.
+\end{proof}
+\subsection{Spectrum and third existence theorem}
+In this section, we will discuss on the \textbf{spectrum} of an operator $L$, then derive the existence of weak solutions for eigenvalue problem.
+\begin{theorem}{Third existence theorem for weak solutions}
+    \begin{enumerate}
+        \item There exists an at most countable set $\Sigma\subset\mathbb{R}$ such that the BVP 
+        \begin{equation}
+            \label{eq:eigen-BVP}
+            \left\{
+                \begin{aligned}
+                    Lu&=\lambda u+f,x\in U;\\
+                    u&=0,x\in\partial U\\
+                \end{aligned}
+            \right.
+        \end{equation}
+        has a unique weak solution for each $f\in L^{2}(U)$ if and only if $\lambda\notin\Sigma$.
+        \item If $\Sigma$ is infinite, then $\Sigma=\{\lambda_{k}\}_{k=1}^{\infty}$, the values of a nondecreasing sequence with $\lambda_{k}\rightarrow+\infty$.
+    \end{enumerate}
+\end{theorem}
+\begin{remark}
+    \begin{enumerate}
+        \item $\Sigma$ is called the \textbf{spectrum} of operator $L$.
+        \item If $f=0$, the BVP \eqref{eq:eigen-BVP} is called eigenvalue problem, and if there exists a solution $\omega\neq 0$, $\lambda$ is called an \textbf{eigenvalue} of $L$, and $\omega$ is a corresponding \textbf{eigenfunction}. 
+    \end{enumerate}
+\end{remark}
+\begin{proof}
+    By theorem \ref{thm:2nd_exist}, if $\lambda\in\Sigma$, the homogeneous eigenvalue problem 
+    \begin{equation}
+        \label{eq:homo-eig-prob}
+        \left\{
+            \begin{aligned}
+            Lu&=\lambda u,x\in U,\\
+            u&=0,x\in\partial U
+            \end{aligned}
+        \right.
+    \end{equation}
+    has a solution $u\neq 0$. Consider it's weak form, we can see:
+    \begin{equation}
+        \label{eq:weak_form_for_eig_BVP}
+        B_{\gamma}[u,v]=(\lambda+\gamma)\innerprod{u}{v}.
+    \end{equation}
+    i.e.
+    \begin{equation}
+        u=L_{\gamma}^{-1}(\gamma+\lambda)u=\frac{\lambda+\gamma}{\gamma}Ku.
+    \end{equation}
+    As $u\neq 0$, $u$ is the eigenvector of operator $K$, the corresponding eigenvalue is $\frac{\gamma}{\lambda+\gamma}$. By theorem \ref{thm:2nd_exist}, $K$ is a compact operator, so the Spectrum set $S$ of operator $K$ is either finite set, or else the values of a sequence converging to zero. It means that $\Sigma$ is at most countable, and if $|\Sigma|=\infty$, $\lambda_{k}\rightarrow\infty$.
+\end{proof}
+
+Finally, we note the boundedness of eigenvalue problem.
+\begin{theorem}{Boundedness of the inverse}
+If $\lambda\notin\Sigma$, there exists a constant $C$ such that 
+\begin{equation}
+    \label{eq:bounded}
+    \norm{u}_{L^{2}(U)}\le C\norm{f}_{L^{2}(U)}
+\end{equation}
+whenever $f\in L^{2}(U)$ and $u$ is the unique weak solution of \eqref{eq:eigen-BVP}. The constant $C$ depends only on $\lambda,U$ and the coefficients of $L$.
+\end{theorem}
+\begin{proof}
+    If not, there would exist sequences $\{f_{k}\}\subset L^{2}(U)$ and $\{u_{k}\}\subset H_{0}^{1}(U)$ such that 
+    \begin{equation}
+        \label{eq:counter}
+        \left\{
+            \begin{aligned}
+        Lu_{k}&=\lambda u_{k}+f_{k},x\in U,\\
+        u_{k}&=0,x\in \partial U,\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    but 
+    \begin{equation}
+        \norm{u_{k}}_{L^{2}(U)}>k\norm{f_{k}}_{L^2(U)}.
+    \end{equation}
+    Assume WLOG, $\norm{u_{k}}_{L^2(U)}=1$, we can see $\norm{f_{k}}\rightarrow 0$. Then there exists a subsequence $\{u_{k_{j}}\}$ satisfies:
+    \begin{equation}
+        \label{eq:convergence}
+        \left\{
+            \begin{aligned}
+                u_{k_{j}}&\rightharpoonup u\text{ in }H_{0}^{1}(U),\\
+                u_{k_{j}}&\rightarrow u\text{ in }L^{2}(U).\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    Then $u$ is a weak solution of \eqref{eq:homo-eig-prob}. Since $\lambda\notin\Sigma$, $u\equiv 0$. But $\norm{u_{k}}_{L^{2}(U)}\equiv 1$, contradict!
+\end{proof}
+\section{Interior Regularity}
+Now, we try to discuss on the \textbf{regularity} of weak solutions. Consider a general PDE $Lu=f$, we find the weak solution $u\in H^{1}(U)$. However, if we set $f\in H^{m}(U)$, we expect $u\in H^{m+2}(U)$, it means we derive stronger regularity about the weak solution of $Lu=f$. The point of regularity is to derive analytic estimates from the structural, algebraic assumption of ellipticity.
+
+First, recall the definition of difference quotients, and some related properties.
+\begin{definition}{Difference quotient}
+    \label{def:diff_quo}
+    The $i$-th difference quotient of size $h$ is 
+    \begin{equation}
+        \label{eq:diff_quo}
+        D_{i}^{h}u(x)=\frac{u(x+he_{i})-u(x)}{h}(i=1,\cdots,n)
+    \end{equation}
+    for $x\in V$ and $h\in\mathbb{R}$, $0<|h|<\text{dist}(V,\partial U)$. And $D^{h}(u):=\left(D_{1}^{h}u,\cdots,D_{n}^{h}u\right)$.
+\end{definition}
+The concept of difference quotients is related to weak derivatives, as the following theorem:
+\begin{theorem}
+    \label{thm:diff_and_dir}
+    \begin{enumerate}
+        \item Suppose $1\le p<\infty$ and $u\in W^{1,p}(U)$, for each $V\subset\subset U$, 
+        \begin{equation}
+            \norm{D^{h}u}_{L^{p}(V)}\le C\norm{Du}_{L^{p}(U)}
+        \end{equation}
+        for some constant $C$ and all $0<|h|<\frac{1}{2}\text{dist}(V,\partial U).$
+        \item Assume $1<p<\infty$, $u\in L^{p}(V)$, and there exists a constant $C$ such that 
+        \begin{equation}
+            \norm{D^{h}u}_{L^{p}(V)}\le C
+        \end{equation}
+        for all $0<|h|<\frac{1}{2}\text{dist}(V,\partial U)$, then $u\in W^{1,p}(V)$ with $\norm{Du}_{L^{p}(V)}\le C$.        
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    see \cite{evans2022partial} section 5.8, theorem 3.
+\end{proof}
+
+Then, introduce two lemmas for the integrate of difference quotients.
+\begin{lemma}
+    \label{lem:diff_quo}
+    For a bounded open set $U$, and open set $W\subset\subset U$, 
+    assume $v,w\in H^{1}(U)$,  $\text{supp}(w)\subset W$, $h<\frac{1}{2}\text{dist}(W,\partial U)$, then we can see:
+    \begin{equation}
+        \label{eq:int_by_part}
+        \int_{U}vD_{k}^{-h}w\dif x=-\int_{U}wD_{k}^{h}v\dif x,
+    \end{equation}
+    and  
+    \begin{equation}
+        \label{eq:leibniz_for_diff}
+        D_{k}^{h}(vw)=v^{h}D_{k}^{h}w+wD_{k}^{h}v,
+    \end{equation}
+    for $v^{h}(x):=v(x+he_{k})$.
+\end{lemma}
+\begin{proof}
+    For equation \eqref{eq:int_by_part}, as $\text{supp} w\subset W$, we can see:
+    \begin{equation}
+        \begin{aligned}
+        RHS&=-\int_{W}w(x)\frac{v(x+he_{k})-v(x)}{h}\dif x\\
+        &=\frac{1}{h}\int_{W}w(x)v(x)\dif x-\frac{1}{h}\int_{W}w(x)v(x+he_{k})\dif x.
+        \end{aligned}
+    \end{equation}
+    set $\tilde{W}:=\{y:y=x+he_{k},x\in W\}$, we can see:
+    \begin{equation}
+        \begin{aligned}
+            LHS&=\frac{1}{h}\int_{U}v(x)\left(w(x)-w(x+he_{k})\right)\dif x\\
+            &=\frac{1}{h}\int_{W}v(x)w(x)\dif x-\frac{1}{h}\int_{\tilde{W}}v(x)w(x-he_{k})\dif x.
+        \end{aligned}
+    \end{equation}
+    By integral substitution, choose $y:=x-he_{k}$, we can see:
+    \begin{equation}
+        \int_{\tilde{W}}v(x)w(x-he_{k})\dif x=\int_{W}v(y+he_{k})w(y)\dif y.
+    \end{equation}
+    So, equation \eqref{eq:int_by_part} is true. Then, for equation \eqref{eq:leibniz_for_diff}, we can see:
+    \begin{equation}
+        \begin{aligned}
+            LHS&=\frac{v(x+he_{k})w(x+he_{k})-v(x)w(x)}{h}\\
+            &=\frac{v(x+he_{k})(w(x+he_{k})-w(x))+w(x)(v(x+he_{k})-v(x))}{h}\\
+            &=v^{h}D_{k}^{h}w+wD_{k}^{h}v=RHS.
+        \end{aligned}
+    \end{equation}
+\end{proof}
+Then, we give the main result for this section:
+\begin{theorem}{Interior $H^{2}$-regularity}
+    \label{thm:interior_regularity}
+    Assume $a^{ij}\in C^{1}(U)$, $b^{i},c\in L^{\infty}(U)$, and $f\in L^{2}(U)$. Suppose furthermore that $u\in H^{1}(U)$ is a weak solution of the elliptic PDE $Lu=f$, then:
+    \begin{equation}
+        u\in H_{loc}^{2}(U);
+    \end{equation}
+    and for each open subset $V\subset\subset U$ we have the estimate 
+    \begin{equation}
+        \label{eq:estimate_H2_u}
+        \norm{u}_{H^{2}(V)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right),
+    \end{equation}
+    the constant $C$ depending only on $V$, $U$, and the coefficients of operator $L
+    $.
+\end{theorem}
+Before the proof of this theorem, we should give some remarks.
+
+\begin{remark}
+    \begin{enumerate}
+        \item In this theorem, we don't require $u\in H_{0}^{1}(U)$.
+        \item Since $u\in H_{loc}^{2}(U)$, we have
+        \begin{equation}
+            Lu=f\text{ a.e. in U}.
+        \end{equation}
+    \end{enumerate}
+\end{remark}
+
+\textbf{The idea} : First, construct a truncated function $\zeta\in C^{\infty}(U)$ such that $V\subset\subset W\subset\subset U$, $\zeta|_{V}\equiv 1$, $\zeta|_{U\setminus W}\equiv 0$. Then, choose a test function 
+\begin{equation}
+    \label{eq:test_func}
+    v(x)=-D_{k}^{-h}\left(\zeta^{2}D_{k}^{h}u(x)\right)\in H_{0}^{1}(U).
+\end{equation}
+In fact, if $u\in C^{2}(U)$, $v$ is a difference quotient approximation for $D^{2}u$. Finally, use the relation $B[u,v]=(f,v)$ to approximate $\norm{D_{k}^{h}Du}_{L^{2}(V)}$, and use the second part of theorem \ref{thm:diff_and_dir}.
+\begin{proof}
+    By the definition of weak solution, $B[u,v]=(f,v)$. Then we can see:
+    \begin{equation}
+        \label{eq:modified_weak_sol}
+        \sum \int_{U}a^{ij}u_{x_{i}}v_{x_{j}}\dif x=\int_{U}(f-\sum b_{i}u_{x_{i}}-cu)v\dif x.
+    \end{equation}
+    mark 
+    \begin{equation}
+        \label{eq:expression_for_A}
+        A=\sum\int_{U}a^{ij}u_{x_{i}}v_{x_{j}}\dif x,
+    \end{equation}
+    and choose $v$ as \eqref{eq:test_func}, according to lemma \ref{lem:diff_quo}, we can derive:
+    \begin{equation}
+        \label{eq:partition_for_A}
+        \begin{aligned}
+        A&=-\int_{U}\sum a^{ij}u_{x_{i}}\left(D_{k}^{-h}\left(\zeta^{2}D_{k}^{h}u(x)\right)\right)_{x_{j}}\dif x\\
+        &=\sum\int_{U}D_{k}^{h}\left(a^{ij}u_{x_{i}}\right)\left(\zeta^{2}D_{k}^{h}u(x)\right)_{x_{j}}\dif x\\
+        &=\sum\int_{U}\left(a^{ij,h}D_{k}^{h}u_{x_{i}}+u_{x_{i}}D_{k}^{h}(a^{ij})\right)\left(2\zeta\zeta_{x_{j}}D_{k}^{h}u(x)+\zeta^{2}\left(D_{k}^{h}u(x)\right)_{x_{j}}\right)\dif x\\
+        &=\sum\int_{U}a^{ij,h}\zeta^{2}D_{k}^{h}u_{x_{i}}D_{k}^{h}u_{x_{j}}\dif x\\
+        &+\sum\int_{U}\left(2\zeta\zeta_{x_{j}}u_{x_{i}}D_{k}^{h}(a^{ij})D_{k}^{h}u(x)+2\zeta\zeta_{x_{j}}a^{ij,h}D_{k}^{h}u_{x_{i}}D_{k}^{h}u(x)+\zeta^{2}u_{x_{i}}D_{k}^{h}(a^{ij})\left(D_{k}^{h}u(x)\right)_{x_{j}}\right)\dif x\\
+        &:=A_{1}+A_{2}.
+        \end{aligned}
+    \end{equation}
+    By the uniform elliptic property, there exists $\theta>0$ such that 
+    \begin{equation}
+        \label{eq:approx_A1}
+        A_{1}\ge \theta\int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x.
+    \end{equation}
+    Then we try to approx $|A_{2}|$. As $a^{ij}\in C^{1}(U)$, $\zeta\in C^{\infty}(U)$, we can see:
+    \begin{equation}
+        \label{eq:approx_A2}
+        \begin{aligned}
+            |A_{2}|&\le \sum\int_{U}\left(C_{1}\zeta|u_{x_{i}}||u(x)|+C_{2}\zeta|D_{k}^{h}u_{x_{i}}||D_{k}^{h}u(x)|+C_{3}\zeta|u_{x_{i}}|\left(D_{k}^{h}u(x)\right)_{x_{j}}\right)\dif x\\
+            &\le C\int_{U}\left(\zeta|Du||u|+\zeta|D_{k}^{h}Du||D_{k}^{h}u|+\zeta|Du||D_{k}^{h}Du|\right)\dif x\\
+            &\le \frac{\theta}{2} \int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x+\tilde{C}\int_{U}|Du|^{2}+|D_{k}^{h}u|^{2}\dif x\\
+            &\le\frac{\theta}{2}\int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x+M\int_{U}|Du|^{2}\dif x.
+        \end{aligned}
+    \end{equation}
+    In equation \eqref{eq:approx_A2}, $C_{1},C_{2},C_{3},C,\tilde{C},M$ are all constants. The first step follows from $a^{ij},\zeta\in C^{1}(U)$, the second and the third steps from Cauchy-Schwarz inequality, and the last from theorem \ref{thm:diff_and_dir}.
+
+    Combining \eqref{eq:approx_A1} and \eqref{eq:approx_A2}, we can see 
+    \begin{equation}
+        \label{eq:approx_A}
+        A\ge \frac{\theta}{2}\int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x-M\int_{U}|Du|^{2}\dif x.
+    \end{equation}
+
+    The next step is to approximate the right-hand integral 
+    \begin{equation}
+        \label{eq:integral_B}
+        B:=\int_{U}(f-\sum b_{i}u_{x_{i}}-cu)v\dif x.
+    \end{equation}
+    First, as $b_{i}\in C^{1}(U)$, we can see 
+    \begin{equation}
+        \label{eq:approx1_B}
+        |B|\le C\int_{U}(|f|+|Du|+|u|)|v|\dif x.
+    \end{equation}
+    Then, consider 
+    \begin{equation}
+        \label{eq:approx_int_v2}
+        \begin{aligned}
+            \int_{U}v^{2}\dif x&=\int_{U}|D_{k}^{-h}(\zeta^{2}D_{k}^{h}u)|^{2}\dif x\\
+            &\le C\int_{U}D|\zeta^{2}D_{k}^{h}u|^{2}\dif x\\
+            &\le C\int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x+C\int_{W}|D_{k}^{h}u|^{2}\dif x\\
+            &\le C\int_{U}\left(|Du|^{2}+\zeta^{2}|D_{k}^{h}Du|^{2}\right)\dif x.
+        \end{aligned}
+    \end{equation}
+    The second step follows from theorem \ref{thm:diff_and_dir}, the third step follows from the Leibniz formula, and the final step follows from theorem \ref{thm:diff_and_dir} as well.
+    
+    Finally, by \eqref{eq:approx1_B} , \eqref{eq:approx_int_v2} and Cauchy-Schwarz inequality, there exists constant $C$ such that 
+    \begin{equation}
+        \label{eq:approx_B}
+        |B|\le\frac{\theta}{4}\int_{U}\zeta^{2}|D_{k}^{h}Du|^{2}\dif x+C\int_{U}\left(|f|^2+|u|^2+|Du|^2\right)\dif x.
+    \end{equation}
+    
+    By the estimation \eqref{eq:approx_A} and \eqref{eq:approx_B}, it's clear that $\forall h>0$, $\exists$ constant $C>0$, such that 
+    \begin{equation}
+        \int_{V}|D_{k}^{h}Du|^{2}\dif x\le C(\norm{f}_{L^{2}(U)}+\norm{u}_{H^{1}(U)}).
+    \end{equation}
+    It means that $Du\in H^{1}(V)$, and 
+    \begin{equation}
+        \norm{u}_{H^{2}(V)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{H^{1}(U)}\right).
+    \end{equation}
+
+    Finally, choose auxiliary function $\xi\in C^{\infty}(U)$, $\text{supp}\xi\subset U$ and $\xi\equiv 1$ on $W$, set $v=\xi^{2}u$, according to equation \eqref{eq:modified_weak_sol}, we can see:
+    \begin{equation}
+        \int_{U}\xi^{2}|Du|^{2}\dif x\le C\int_{U}(f^{2}+u^2)\dif x.
+    \end{equation}
+    Then:
+    \begin{equation}
+        \norm{u}_{H^{1}(W)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right).
+    \end{equation}
+\end{proof}
+\begin{remark}
+    Theorem \ref{thm:interior_regularity} shows the condition for the higher regularity of weak solutions.
+\end{remark}
+Then, we introduce the higher interior regularity.
+\begin{theorem}{Higher interior regularity}
+    \label{thm:higher_int_regular}
+    Let $m$ be a nonnegative integer, and assume $a^{ij},b^{i},c\in C^{m+1}(U)$, and $f\in H^{m}(U)$. Suppose $u\in H^{1}(U)$ is a weak solution of the elliptic PDE
+    \begin{equation}
+        Lu=f,
+    \end{equation}
+    then $u\in H_{loc}^{m+2}(U)$ and for each $V\subset\subset U$ we have the estimate 
+    \begin{equation}
+        \norm{u}_{H^{m+2}(V)}\le C(\norm{f}_{H^{m}(U)}+\norm{u}_{L^{2}(U)}).
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    We prove this theorem by induction. If $m=0$, theorem \ref{thm:higher_int_regular} is equivalent to theorem \ref{thm:interior_regularity}, so the induction basis is true. Assume theorem \ref{thm:higher_int_regular} is true for $m=k$, i.e. if $a^{ij},b^{i},c\in C^{k+1}(U)$, $f\in H^{k}(U)$, the weak solution $u\in H^{1}(U)$ satisfies
+    \begin{equation}
+        \norm{u}_{H^{k+2}(W)}\le C(\norm{f}_{H^{k}(U)}+\norm{u}_{L^{2}(U)}).
+    \end{equation}
+    for each $W\subset\subset U$ and approximate constant $C$, and $u\in H_{loc}^{k+2}(U)$. Then let $\alpha$ be any multiindex with $|\alpha|=m+1$ and choose any auxiliary function $\tilde{v}\in C_{c}^{\infty}(W)$. Choose the test function $v=(-1)^{|\alpha|}D^{\alpha}\tilde{v}$, insert it into the weak form $B[u,v]=(f,v)$, perform some integrations by parts, we discover:
+    \begin{equation}
+        \label{eq:Buv_int_by_part}
+        \begin{aligned}
+            B[u,v]&=\sum\int_{U}a^{ij}u_{x_{i}}(-1)^{|\alpha|}(D^{\alpha}\tilde{v})_{x_{j}}\dif x+\sum\int_{U}b^{i}u_{x_{i}}(-1)^{|\alpha|}D^{\alpha}\tilde{v}\dif x+\int_{U}cu(-1)^{|\alpha|}D^{\alpha}\tilde{v}\dif x\\
+            &=\sum\int_{U}D^{\alpha}(a^{ij}u_{x_{i}})\tilde{v}_{x_{j}}\dif x+\sum\int_{U}D^{\alpha}(b^{i}u_{x_{i}})\tilde{v}\dif x+\int_{U}D^{\alpha}(cu)\tilde{v}\dif x\\
+            &=B[D^{\alpha}u,\tilde{v}]-\sum_{i,j}\sum_{\beta\le\alpha}\int_{U}\binom{\alpha}{\beta}(D^{\alpha-\beta}a^{ij}D^{\beta}u_{x_{i}})_{x_{j}}\tilde{v}\dif x+\sum_{i}\sum_{\beta\le\alpha}\int_{U}D^{\alpha-\beta}b^{i}D^{\beta}u_{x_{i}}\tilde{v}\dif x\\
+            &+\sum_{\beta\le\alpha}\int_{U}D^{\alpha-\beta}cD^{\beta}u\tilde{v}\dif x.
+        \end{aligned}
+    \end{equation}
+    So if we write $\tilde{u}:=D^{\alpha}u$, we can see:
+    \begin{equation}
+        B[\tilde{u},\tilde{v}]=(\tilde{f},\tilde{v}).
+    \end{equation}
+    Where 
+    \begin{equation}
+        \tilde{f}:=D^{\alpha}f-\sum_{\beta<\alpha}\binom{\alpha}{\beta}\left[-\sum(D^{\alpha-\beta}a^{ij}D^{\beta}u_{x_{i}})_{x_{j}}+\sum D^{\alpha-\beta}b^{i}D^{\beta}u_{x_{i}}+D^{\alpha-\beta}cD^{\beta}u\right].
+    \end{equation}
+    We can see that $\tilde{u}$ is the weak solution of equation $L\tilde{u}=\tilde{f}$. Since $a^{ij},b^{i},c\in C^{k+2}(U)$, $f\in H^{k+1}(U)$, we can see $\tilde{f}\in L^{2}(W)$, and 
+    \begin{equation}
+        \norm{\tilde{f}}_{L^{2}(W)}\le C\left(\norm{f}_{H^{m+1}(U)}+\norm{u}_{L^{2}(U)}\right).
+    \end{equation}
+    In light of theorem \ref{thm:interior_regularity}, we see $\tilde{u}\in H^{2}(V)$ with 
+    \begin{equation}
+        \norm{\tilde{u}}_{H^{2}(V)}\le\ C(\norm{f}_{H^{m+1}(U)}+\norm{u}_{L^{2}(U)}).
+    \end{equation}
+    As the inequality holds for all multiindex $\alpha$ satisfies $|\alpha|=m+1$, the theorem is true.
+\end{proof}

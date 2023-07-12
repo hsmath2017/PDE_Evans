@@ -1,4 +1,4 @@
-\documentclass[11pt]{elegantbook}
+\documentclass[11pt,bibend=bibtex]{elegantbook}
 \newcommand{\dif}{\mathrm{d}}
 \newcommand{\innerprod}[2]{\left<#1,#2\right>}
 \newcommand{\norm}[1]{\left\|#1\right\|}
@@ -31,5 +31,6 @@
 \mainmatter
 
 \input{chap6.tex}
+\printbibliography[heading=bibintoc, title=\ebibname]
 
 \end{document}

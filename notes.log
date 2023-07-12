@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.17)  3 JUL 2023 21:30
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.9.17)  12 JUL 2023 13:10
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -699,6 +699,16 @@ Package biblatex Info: ... file 'blx-compat.def' found.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/blx-compat.def
 File: blx-compat.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
 )
+Package biblatex Info: Trying to load BibTeX backend compatibility...
+Package biblatex Info: ... file 'blx-bibtex.def' found.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/blx-bibtex.def
+File: blx-bibtex.def 2022/07/12 v3.18b biblatex compatibility (PK/MW)
+
+
+Package biblatex Warning: Using fall-back BibTeX(8) backend:
+(biblatex)                functionality may be reduced/unavailable.
+
+)
 Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  (/usr/local/texlive/2022/texmf-dist/tex/latex/biblatex/biblatex.def
@@ -1169,7 +1179,11 @@ Package: suffix 2006/07/15 1.5a Variant command support
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (./notes.aux)
+ (./notes.aux
+
+LaTeX Warning: Label `eq:bounded' multiply defined.
+
+)
 \openout1 = `notes.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
@@ -1260,7 +1274,11 @@ Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
-\openout5 = `notes.bcf'.
+Package biblatex Info: XeTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+\openout5 = `notes-blx.bib'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'notes.bbl' found.
@@ -1352,20 +1370,30 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 ]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 10.0pt on input line 119.
- [2] [3] [4] [5] [6]) [7] (./notes.aux)
+ [2] [3] [4] [5] [6] [7] [8]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 8.0pt on input line 544.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 6.0pt on input line 544.
+ [9] [10] [11] [12]) [13] [14
+
+] (./notes.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `notes.out' has not changed.
-(rerunfilecheck)             Checksum: 8DC2211A596B997FED9F60FEDDA1D63D;489.
+(rerunfilecheck)             Checksum: A6E44643F8CBE34CB99E7F0EA080250B;766.
 Package logreq Info: Writing requests to 'notes.run.xml'.
 \openout1 = `notes.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 42433 strings out of 475748
- 883063 string characters out of 5799183
- 1840562 words of memory out of 5000000
- 62892 multiletter control sequences out of 15000+600000
- 475843 words of font info for 79 fonts, out of 8000000 for 9000
+ 42767 strings out of 475748
+ 889718 string characters out of 5799183
+ 1756754 words of memory out of 5000000
+ 63220 multiletter control sequences out of 15000+600000
+ 475859 words of font info for 81 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,12n,99p,697b,1320s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,13n,99p,1900b,4663s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on notes.pdf (9 pages).
+Output written on notes.pdf (16 pages).
