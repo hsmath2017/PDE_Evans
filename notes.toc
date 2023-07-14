@@ -8,4 +8,5 @@
 \contentsline {subsection}{\numberline {1.2.3}Fredholm alternative and the solvability}{6}{subsection.1.2.3}%
 \contentsline {subsection}{\numberline {1.2.4}Spectrum and third existence theorem}{8}{subsection.1.2.4}%
 \contentsline {section}{\numberline {1.3}Interior Regularity}{9}{section.1.3}%
-\contentsline {chapter}{Bibliography}{14}{chapter*.2}%
+\contentsline {section}{\numberline {1.4}Boundary regularity}{13}{section.1.4}%
+\contentsline {chapter}{Bibliography}{15}{chapter*.2}%

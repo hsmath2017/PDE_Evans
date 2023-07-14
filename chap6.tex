@@ -729,6 +729,7 @@ In fact, if $u\in C^{2}(U)$, $v$ is a difference quotient approximation for $D^{
     \end{equation}
     Then:
     \begin{equation}
+        \label{eq:estimate_u_H1}
         \norm{u}_{H^{1}(W)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right).
     \end{equation}
 \end{proof}
@@ -778,5 +779,74 @@ Then, we introduce the higher interior regularity.
     \begin{equation}
         \norm{\tilde{u}}_{H^{2}(V)}\le\ C(\norm{f}_{H^{m+1}(U)}+\norm{u}_{L^{2}(U)}).
     \end{equation}
-    As the inequality holds for all multiindex $\alpha$ satisfies $|\alpha|=m+1$, the theorem is true.
+    As the inequality holds for all multiindex $\alpha$ satisfies $|\alpha|=m+1$, the proof is completed.
+\end{proof}
+\section{Boundary regularity}
+Now, we extend to give the regularity of weak solution for homogeneous Dirichlet boundary value problem. In fact, when it comes to Dirichlet BVPs, the result comes to be stronger.
+\begin{theorem}{Boundary $H^{2}$-regularity}
+    \label{thm:boundary_regularity}
+Assume $a^{ij}\in C^{1}(\bar{U}), b^{i},c\in L^{\infty}(U)$ and $f\in L^{2}(U)$. Suppose that $u\in H_{0}^{1}(U)$ is a weak solution of the elliptic BVP \eqref{eq:Elliptic_eq}. Assume finally $\partial U$ is $C^{2}$, then $u\in H^{2}(U)$ and we have the estimate
+\begin{equation}
+    \label{eq:estimate_for_Dirichlet}
+    \norm{u}_{H^{2}(U)}\le C(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}).
+\end{equation}
+The constant $C$ depending only on $U$ and the coefficients of $L$.
+\end{theorem}
+\begin{remark}
+    \begin{itemize}
+        \item Main difference from theorem \ref{thm:interior_regularity}: now $u\in H^{2}(U)$ rather than $u\in H_{loc}^{2}(U)$.
+        \item If equation \eqref{eq:Elliptic_eq} has unique solution, we can see $\norm{u}_{H^{2}(U)}\le C\norm{f}_{L^{2}(U)}$ from theorem \ref{thm:boundary_regularity}. This result shows the \textbf{well-posed} of elliptic equation.
+        \item In this theorem, we assume $u\equiv 0$ along $\partial U$ in the trace case.
+    \end{itemize}
+\end{remark}
+\textbf{The idea of the proof}: First, consider the special case that $U$ is a half-ball, then $\forall x_{0}\in \partial U$, choose a homologeous map from $B(x_{0},\epsilon)\cap U$ to the half ball. Finally, use the compactness of $\partial U$.
+\begin{proof}
+    First, consider the case $U=B(0,1)\cap\mathbb{R}_{+}^{n}$. The target is to show that $\exists V\subset\subset U$ with $\partial V\cap\partial U\neq\emptyset$ such that 
+    \begin{equation}
+        \label{eq:estimate_ball}
+        \norm{u}_{H^{2}(V)}\le C(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}).
+    \end{equation}
+    To derive the $H^{2}$ norm on subset $V:=B(0,\frac{1}{2})\cap\mathbb{R}_{+}^{n}$, we first derive the truncated function $\zeta\in C^{\infty}(U)$ satisfies:
+    \begin{equation}
+        \label{eq:truncated_func}
+        \left\{
+            \begin{aligned}
+                &\zeta\equiv 1,x\in B(0,\frac{1}{2})\\
+                &\zeta\equiv 0,x\notin B(0,1),\\
+                &0\le\zeta\le 1,\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    such that $\zeta$ vanishes near the curved part of $\partial U$. Since $u$ is a weak solution of equation \eqref{eq:Elliptic_eq}, we have $B[u,v]=(f,v)$ for all $v\in H_{0}^{1}(V)$. Consequently, we can also write the auxiliary equation \eqref{eq:auxiliary_weak_form}. Then we should derive the form of $v\in H_{0}^{1}(U)$.
+
+    Consider $1\le k\le n-1$, set $v=-D_{k}^{-h}(\zeta^{2}D_{k}^{h}u)$, first we claim that $v\in H_{0}^{1}(U)$. In fact:
+    \begin{equation}
+        \label{eq:expression_for_v}
+        v(x)=\frac{1}{h^2}\left[\zeta^2(x-he^{k})u(x)+\zeta^2(x)u(x)-\zeta^2(x)u(x+he^{k})-\zeta^2(x-he^{k})u(x-he^{k})\right].
+    \end{equation}
+    On the face $\{x_{n}=0\}$, by the definition of weak solution, $u(x)=0$. And near the curved part of $\partial U$, by the definition of $\zeta$, $\zeta(x)=0$. So on $\partial U$, we can see $v(x)\equiv 0$, i.e. $v(x)\in H_{0}^{1}(U)$.
+
+    Then, by equation \eqref{eq:auxiliary_weak_form} and the same method as theorem \ref{thm:interior_regularity}, we can see that for $1\le k\le n-1$, 
+    \begin{equation}
+        \int_{V}|D_{k}^{h}Du|^{2}\dif x\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{H^{1}(U)}\right).
+    \end{equation}
+    i.e.
+    \begin{equation}
+        \label{eq:estimate_1_for_half_ball}
+        \sum_{\substack{k+l<2n\\k=l=1}}^{n}\int_{V}|u_{x_{k}x_{l}}^{2}|\dif x\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{H^{1}(U)}\right).
+    \end{equation}
+    But we can't estimate $\norm{u_{x_{n}x_{n}}}_{L^{2}(V)}$ by this method, for $x-he^{n}$ may lie outside the region $U$. Now we rewrite the equation \eqref{eq:Elliptic_eq} by nondivergence form, i.e.
+    \begin{equation}
+        -\sum_{i,j=1}^{n}a^{ij}u_{x_{i}x_{j}}+\sum_{i=1}^{n}\tilde{b}^{i}u_{x_{i}}+cu=f.
+    \end{equation}
+    As $a^{ij}(x)$ satisfies \textbf{uniformly elliptic condition}, there exists $\theta>0$ such that $a^{nn}(x)\ge \theta\;\forall x\in U$. So:
+    \begin{equation}
+        \label{eq:estimate_2_for_half_ball}
+        |u_{x_{n}x_{n}}|\le C\left(\sum_{\substack{i,j=1\\i+j<2n}}^{n}|u_{x_{i}x_{j}}|+|Du|+|u|+|f|\right).
+    \end{equation}
+    By \eqref{eq:estimate_1_for_half_ball}, \eqref{eq:estimate_2_for_half_ball} and \eqref{eq:estimate_u_H1}, we conclude $u\in H^{2}(V)$ and 
+    \begin{equation}
+        \label{eq:estimate_on_half_ball}
+        \norm{u}_{H^{2}(V)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right).
+    \end{equation}
 \end{proof}
