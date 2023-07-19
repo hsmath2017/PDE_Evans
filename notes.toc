@@ -9,4 +9,11 @@
 \contentsline {subsection}{\numberline {1.2.4}Spectrum and third existence theorem}{8}{subsection.1.2.4}%
 \contentsline {section}{\numberline {1.3}Interior Regularity}{9}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Boundary regularity}{13}{section.1.4}%
-\contentsline {chapter}{Bibliography}{15}{chapter*.2}%
+\contentsline {section}{\numberline {1.5}Maximum Principles}{16}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Weak maximum principle}{16}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Strong maximum principle}{17}{subsection.1.5.2}%
+\contentsline {section}{\numberline {1.6}Harnack's Inequality}{19}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Eigenvalues and Eigenfunctions}{20}{section.1.7}%
+\contentsline {subsection}{\numberline {1.7.1}Eigenvalues of symmetric elliptic operators}{20}{subsection.1.7.1}%
+\contentsline {section}{\numberline {1.8}Eigenvalues of nonsymmetric elliptic operators}{22}{section.1.8}%
+\contentsline {chapter}{Bibliography}{24}{chapter*.2}%

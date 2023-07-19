@@ -47,7 +47,7 @@ Now, give an important property of the differential operator $L$.
 
 \begin{remark}
     \begin{itemize}
-        \item $L$ is uniformly elliptic means the matrix $(a^{ij}(x))$ is positive definite $\forall x\in U$.
+        \item $L$ is uniformly elliptic means the matrix $(a^{ij}(x))$ is positive definite for a.e. $x\in U$.
         \item The converse proposition of the above proposition isn't true.
         \item Special case: $a^{ij}(x)\equiv\delta_{ij}, b^{i}\equiv 0, c^{i}\equiv 0$. In this case, the equation \eqref{eq:Elliptic_eq} is the \textbf{Poisson equation}.
     \end{itemize}
@@ -849,4 +849,489 @@ The constant $C$ depending only on $U$ and the coefficients of $L$.
         \label{eq:estimate_on_half_ball}
         \norm{u}_{H^{2}(V)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right).
     \end{equation}
+
+    Then, we drop the assumption that $U$ is a half-ball. In general case, we choose any point $x^{0}\in\partial U$ and note that since $\partial U$ is $C^{2}$, we may assume that 
+    \begin{equation}
+        U\cap B(x^{0},r)=\{x\in B(x^{0},r)|x_{n}>\gamma(x_{1},\cdots,x_{n-1})\}
+    \end{equation}
+    for some $r<0$ and some $C^{2}$ function $\gamma$. Consider the "flatten out" map as follows:
+    \begin{equation}
+        \Phi^{i}(x)=\left\{
+            \begin{aligned}
+                &x_{i},i=1,\cdots,n-1;\\
+                &x_{n}-\gamma(x_{1},\cdots,x_{n-1}),i=n.\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    Then write $y=\Phi(x)$, $x=\Psi(y)$ as the linear map from $U\cap B(x^{0},r)$ to $\tilde{U}$. We can see $\tilde{U}$ has a piece of boundary as $y_{n}=0$. Finally, we define $u'(y):=u(\Psi(y))$, it's clear that $u'\in H^{1}(\tilde{U})$ and $u'=0$ on $\partial \tilde{U}\cap \{y_{n}=0\}$. Now, we transform equation \eqref{eq:Elliptic_eq} to the equation related to $u'$ on $\tilde{U}$.
+
+    Write the PDE related to $u'$ as 
+    \begin{equation}
+        \label{eq:modified_equation_for_u}
+        L'u'=f',
+    \end{equation}
+    with the function $f'(y):=f(\Psi(y))$, and the operator 
+    \begin{equation}
+        L'u':=-\sum_{k,l=1}^{n}(a^{'kl}u'_{y_{k}})_{y_{l}}+\sum_{k=1}^{n}b^{'k}u'_{y_k}+c'u'.
+    \end{equation}
+    where 
+    \begin{equation}
+        \label{eq:aprime}
+        a^{'kl}(y)=\sum_{r,s=1}^{n}a^{rs}(\Psi(y))\Phi_{x_{r}}^{k}(\Psi(y))\Phi_{x_{s}}^{l}(\Psi(y)),
+    \end{equation}
+    \begin{equation}
+        \label{eq:bprime}
+        b^{'k}(y)=\sum_{r=1}^{n}b^{r}(\Psi(y))\Phi_{x_{r}}^{k}(\Psi(y)),
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:cprime}
+        c'(y)=c(\Psi(y)),
+    \end{equation}
+    for $y\in U'$, $k,l=1,\cdots,n$. In fact, the operator is derived using the chain rule of derivatives.
+
+    If $v'\in H_{0}^{1}(U')$ and $B'[\cdot,\cdot]$ denotes the bilinear form associated with the operator $L'$, we have:
+    \begin{equation}
+        \label{eq:coordinate_change_B}
+        B'[u',v']=\int_{\tilde{U}}\sum a^{'kl}u_{y_k}^{'}v_{y_l}^{'}+\sum b^{'k}u_{y_k}^{'}v'+c'u'v'\dif y. 
+    \end{equation}
+    Set the function $v'(x)=v(\Psi(x))$, and we define $u'(x)=u(\Psi(x))$ before, by \eqref{eq:coordinate_change_B}, we can see:
+    \begin{equation}
+        \label{eq:form_of_B}
+        \begin{aligned}
+            B'[u',v']&=\sum\int_{\tilde{U}}a^{'kl}u_{x_{i}}\Psi_{y_{k}}^{i}v_{x_{j}}\Psi_{y_{l}}^{j}\dif y+\sum\int_{\tilde{U}}b^{'k}u_{x_{i}}\Psi_{y_{k}}^{i}v\dif y+\int_{\tilde{U}}c'uv\dif y.
+        \end{aligned}
+    \end{equation}
+    In the following equation, $u$, $v$ means $u(\Psi(y))$, $v(\Psi(y))$ respectively. By equation \eqref{eq:aprime}, we can see:
+    \begin{equation}
+        \sum_{k,l}a^{'kl}\Psi_{y_{k}}^{i}\Psi_{y_{l}}^{j}=\sum_{r,s}\sum_{k,l}a^{rs}\Phi_{x_{r}}^{k}\Phi_{x_{s}}^{l}\Psi_{y_{k}}^{i}\Psi_{y_{l}}^{j}=a^{ij}
+    \end{equation}
+    since $D\Psi=(D\Phi)^{-1}$. Similarly,
+    \begin{equation}
+        \sum_{k=1}^{n}b^{'k}\Psi_{y_{k}}^{i}=b^{i}.
+    \end{equation}
+    So:
+    \begin{equation}
+        \label{eq:samesol}
+        B'[u',v']=B[u,v]=\innerprod{f}{v}=\innerprod{f'}{v'},
+    \end{equation}
+    i.e. the auxiliary PDE has the same solution as original PDE.
+
+    Then we check the operator $L'$ is uniformly elliptic in $U'$. If $y\in U'$ and $\xi\in\mathbb{R}^{n}$, we note that 
+    \begin{equation}
+        \sum_{k,l=1}^{n}a^{'kl}(y)\xi_{k}\xi_{l}=\sum_{k,l}\sum_{r,s}a^{rs}(\Psi(y))\Phi_{x_{r}}^{k}\Phi_{x_{s}}^{l}\xi_{k}\xi_{l}=\sum_{r,s}a^{rs}(\Psi(y))\eta_{r}\eta_{s}\ge\theta|\eta|^{2}.
+    \end{equation}
+    where $\eta=\xi D\Phi$. So $L'$ is uniformly elliptic on $\tilde{U}$. It's clear that $a^{'ij},b^{'i},c'\in C^{1}(\tilde{U})$.
+
+    Finally, by equation \eqref{eq:estimate_on_half_ball} and \eqref{eq:samesol}, we can see that 
+    \begin{equation}
+        \norm{u}_{H^{2}(V)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{u}_{L^{2}(U)}\right)
+    \end{equation}
+    for an open neighborhood $V$ of $x^{0}$. 
+
+    Since $\partial U$ is compact, we can cover $\partial U$ with finitely many sets $V_{1},\cdots, V_{N}$ as above. Sum them up, then complete the proof.
+\end{proof}
+
+Then, derive the higher boundary regularity
+\begin{theorem}{Higher boundary regularity}
+    Let $m$ be a nonnegative integer, and assume $a^{ij},b^{i},c\in C^{m+1}(\bar{U})$, and $f\in H^{m}(U)$, suppose that $u\in H_{0}^{1}(U)$ is a weak solution of the BVP
+    \begin{equation}
+        \left\{
+            \begin{aligned}
+                Lu&=f,x\in U;\\
+                u&=0,x\in\partial U.
+            \end{aligned}
+        \right.
+    \end{equation}
+    Assume finally $\partial U\in C^2$, then $u\in H^{m+2}(U)$ and we have the estimate
+    \begin{equation}
+        \norm{u}_{H^{m+2}(U)}\le C(\norm{f}_{H^{m}(U)}+\norm{u}_{L^{2}(U)}).
+    \end{equation}
+\end{theorem}
+\begin{proof}
+    Skip. See \cite{evans2022partial} Page 343-345.
+\end{proof}
+
+In this section, the basic tool of integration by parts has eventually taken us from weak solution $u\in H_{0}^{1}(U)$ to smooth, classical solutions.
+\section{Maximum Principles}
+In this section, we concentrate on the properties of elliptic operator $L$, and we assume that $u\in C^{2}(U)$. As $u\in C^{2}(U)$, we can see if $u(x)$ attains its maximum over $U$, then $Du(x_{0})=0,D^{2}u(x_{0})\le 0$. Now, we consider elliptic operators $L$ having the nondivergence form:
+\begin{equation}
+    \label{eq:div_form}
+    Lu=-\sum_{i,j=1}^{n}a^{ij}u_{x_{i}x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}+cu,
+\end{equation}
+where the coefficients $a^{ij},b^{i},c$ are continuous and the uniform ellipticity condition \ref{defn:uniformly_elliptic} holds. Without loss of generality, we assume the symmetry condition $a^{ij}=a^{ji}$.
+\subsection{Weak maximum principle}
+First, assume $U\subset\mathbb{R}^{n}$ is open and bounded, we will show that if $Lu\le 0$ in $U$ and $c\equiv 0$, $u$ must attain its maximum on $\partial U$.
+\begin{theorem}{Weak maximum principle}
+    \label{thm:WMP}
+    Assume $u\in C^{2}(U)\cap C^{1}(\bar{U})$ and $c\equiv 0$ in $U$, if $Lu\le 0$ in $U$, then
+    \begin{equation}
+        \label{eq:max_principle}
+        \max_{\bar{U}}u=\max_{\partial U}u.
+    \end{equation}
+\end{theorem} 
+\begin{proof}
+    First, consider a stronger case, i.e. $Lu<0$. Assume there exists a point $x_{0}\in U$ such that $u(x_{0})=\max_{U}u(x)$. By the basic vector calculus, we can see:
+    \begin{equation}
+        \label{eq:one_order}
+        Du(x_{0})=\mathbf{0},
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:two_order}
+        D^{2}u(x_{0})\le 0.
+    \end{equation}
+    Mark that $D^{2}u(x_{0})\le 0$ means that the Hesse matrix $D^{2}u(x_{0})$ is semi negative definite. Since $A(x_{0})$ is symmetric and positive definite, there exists an orthogonal matrix $O$ such that 
+    \begin{equation}
+        OA(x_{0})O^{T}=D,
+    \end{equation}
+    while $D$ is a diagonal matrix. Now write $y=x_{0}+O(x-x_{0})$, i.e. $x-x_{0}=O^{T}(y-x_{0})$. Mark $O=(o_{ij})$, by the chain rule of derivatives:
+    \begin{equation}
+        u_{x_{i}}=\sum_{k=1}^{n}u_{y_{k}}o_{ki},u_{x_{i}x_{j}}=\sum_{k,l=1}^{n}u_{y_{k}y_{l}}o_{ki}o_{lj}.
+    \end{equation}
+    Then, at the point $x_{0}$,
+    \begin{equation}
+        \sum_{i,j}a^{ij}u_{x_{i}}u_{x_{j}}=\sum_{k,l}\sum_{i,j} a^{ij}u_{y_{k}y_{l}}o_{ki}o_{lj}=\sum_{i} d^{i}u_{y_{i}y_{i}}
+    \end{equation}
+    As $D^{2}u(x_{0})\le 0$, we can see $u_{y_{i}y_{i}}(x_{0})\le 0$, and for $A(x_{0})$ is positive definite, $d^{i}\ge 0$, i.e. 
+    \begin{equation}
+        \sum_{i,j}a^{ij}u_{x_{i}}u_{x_{j}}\le 0.
+    \end{equation}
+    On the other hand, at the point $x_{0}$:
+    \begin{equation}
+        \sum_{i=1}^{n}b^{i}u_{x_{i}}(x_{0})=\sum_{i=1}^{n}\sum_{k=1}^{n}u_{y_{k}}o_{ki}b^{i}=0.
+    \end{equation}
+    It means that $Lu(x_{0})\le 0$, contradict! So if $Lu<0$ in $U$, the maximum value of $u$ in $\bar{U}$ appears on $\partial U$.
+
+    In general case, i.e. $Lu\le 0$, we derive the auxiliary function $u^{\epsilon}(x)=u(x)+\epsilon e^{\lambda x_{1}}$, then:
+    \begin{equation}
+        \begin{aligned}
+            Lu^{\epsilon}&=Lu+\epsilon L(e^{\lambda x_{1}})\\
+            &\le \epsilon e^{\lambda x_{1}}(-\lambda^{2}a^{11}+\lambda b^{1})\\
+            &\le \epsilon e^{\lambda x_{1}}(-\lambda^{2}\theta+\lambda\norm{b}_{L^{\infty}}).
+        \end{aligned}
+    \end{equation}
+    if we choose sufficiently large $\lambda$, we can see $Lu^{\epsilon}<0$ for any $\epsilon>0$. By the proof above, $u^{\epsilon}$ gets its maximum on $\partial U$. Let $\epsilon\rightarrow 0$, we can see $u$ gets its maximum on $\partial U$.
+\end{proof}
+\begin{remark}
+    \begin{itemize}
+        \item Maximum principle shows an important property for elliptic operator $L$.
+        \item Since $-u$ is a subsolution whenever $u$ is a supersolution, if $Lu\ge 0$ in $U$, we can see $\min_{\bar{U}}u=\min_{\partial U}u.$
+        \item Write $u^{+}=\max(u,0)$, if $c\ge 0$ and $Lu\le 0$ in $U$, we can see $\max_{\bar{U}}u\le\max_{\partial U}u^{+}$. Just consider the operator $K=L-cI$ to prove it.
+    \end{itemize}
+\end{remark}
+\subsection{Strong maximum principle}
+In this section, we establish the stronger result known as the strong maximum principle. In Theorem \ref{thm:WMP}, we prove that $u$ attains its maximum on the boundary $\partial U$. In fact, if there exists $x_0 \in U$ such that $u(x_0) = \max_{\bar{U}} u(x)$, then $u(x)$ must be constant, which is referred to as the \textbf{strong maximum principle}. First, we should introduce the \textbf{Hopf's lemma}, which derives a subtle analysis of the outer normal derivative $\pdfFrac{u}{\nu}$.
+\begin{lemma}{Hopf's Lemma}
+    \label{lem:Hopf}
+    Assume $u\in C^{2}(U)\cap C^{1}(\bar{U})$ and $c\equiv 0$ in $U$, suppose further $Lu\le 0$ in $U$ and there exists $x^{0}\in\partial U$ such that 
+    \begin{equation}
+        u(x^{0})>u(x)
+    \end{equation}
+    for all $x\in U$. Assume finally that $U$ satisfies the interior ball condition at $x^{0}$, that is, there exists an open ball $B\subset U$ with $x^{0}\in\partial B$.
+    \begin{itemize}
+        \item Then, $\pdfFrac{u}{\nu}(x^{0})>0$ where $\nu$ is the outer unit normal to $B$ at $x^{0}$.
+        \item If $c\ge 0$ in $U$, the same conclusion holds provided $u(x^{0})\ge 0$.
+    \end{itemize} 
+\end{lemma}
+\begin{remark}  
+    \begin{itemize}  
+      \item The inequality $\frac{\partial u}{\partial \nu}(x^{0})\geq 0$ is trivial, so the strict inequality is necessary.  
+      \item If the boundary $\partial U$ is $C^{2}$, the interior ball condition is satisfied.  
+      \item The idea of this proof is to construct an auxiliary function $v$ that satisfies the following conditions:  
+        \begin{itemize}  
+          \item $v|_{\partial B}=0$,  
+          \item $Lv\leq 0$,  
+          \item $\frac{\partial v}{\partial \nu}(x^{0})<0$.  
+        \end{itemize}  
+    \end{itemize}  
+\end{remark}  
+\begin{proof}
+    Consider the case $c\ge 0$. Without loss of generality, assume the center of the ball $B$ is the origin point, and we write $B=B(0,r)$. Set the auxiliary function 
+    \begin{equation}
+        v(x)=e^{-\lambda |x|^{2}}-e^{-\lambda r^{2}},
+    \end{equation}
+    first verify the three properties above. On $\partial B$, $|x|=r$ means that $\forall x\in \partial B$, $v(x)=0$. Then derive the expression of $Lv$:
+    \begin{equation}
+        \label{eq:calc_Lv}
+        \begin{aligned}
+            Lv&=-\sum a^{ij}v_{x_{i}x_{j}}+\sum b^{i}v_{x_{i}}+cv\\
+            &=-\sum a^{ij}(x)4\lambda^2 e^{-\lambda|x|^{2}}x_{i}x_{j}+2\lambda e^{-\lambda |x|^2}\sum a^{ii}(x)-2\lambda\sum_{i=1}^{n}b^{i}e^{-\lambda|x|^2}+c(e^{-\lambda|x|^2}-e^{-\lambda r^{2}})\\
+            &\le e^{-\lambda|x|^2}\left(-4\theta \lambda^{2}|x|^{2}+2\lambda\text{tr}(A)+2\lambda\norm{b}_{L^{\infty}}|x|+c\right).
+        \end{aligned}
+    \end{equation}
+    Choose $\lambda$ sufficiently large, we can see $Lv\le 0$ for $x\in B(0,r)\setminus B(0,\frac{r}{2})$. Mark $u^{\epsilon}(x):=u(x)+\epsilon v(x)-u(x^{0})$, we can see $Lu^{\epsilon}(x)\le -cu(x^{0})\le 0$.
+
+    By the equation $u(x^{0})>u(x)$, we can choose sufficiently small $\epsilon>0$ such that 
+    \begin{equation}
+        u^{\epsilon}(x)\le u^{\epsilon}(x^{0})=0
+    \end{equation}
+    on $\partial B(0,\frac{r}{2})$. As $v(x)=0$ on $\partial B(0,r)$, $u^{\epsilon}(x)\le 0$ for $x\in \partial B(0,r)$. By theorem \ref{thm:WMP}, $u^{\epsilon}(x)\le 0$ for all $x\in B(0,r)\setminus B(0,\frac{r}{2})$. And $u^{\epsilon}(x^{0})=0$, so we can see:
+    \begin{equation}
+        \pdfFrac{u^{\epsilon}}{\nu}(x^{0})\ge 0.
+    \end{equation}
+    Consequently:
+    \begin{equation}
+        \pdfFrac{u}{\nu}(x^{0})\ge -\epsilon\pdfFrac{v}{\nu}(x^{0})=-\frac{\epsilon}{r}Dv(x^{0})\cdot x^{0}=2\lambda\epsilon r e^{-\lambda r^{2}}>0.
+    \end{equation}
+\end{proof}
+\begin{remark}
+    \begin{itemize}
+    \item If $c\equiv 0$, we don't require $u(x^{0})\ge 0$, because $Lu^{\epsilon}\le 0$ is true for $u(x^{0})<0$.
+    \item If we write $u^{\epsilon}(x)=u(x)+\epsilon v(x)$, we can see that $Lu^{\epsilon}\le 0$ as well, and $\max_{\partial B(0,\frac{r}{2})\cup \partial B(0,r)}u^{\epsilon}(x)=u(x^{0})$. By remark 3 of theorem \ref{thm:WMP}, if $u(x^{0})\ge 0$, we can see $u^{\epsilon}(x)\le u(x^{0})$ as well; but if $u(x^{0})<0$, we can only derive $u^{\epsilon}(x)\le 0$. So, for $c\ge 0$, the condition $u(x^{0})\ge 0$ is necessary.
+    \end{itemize}
+\end{remark}
+
+Hopf's lemma is the primary technical tool in the next proof:
+\begin{theorem}{Strong maximum principle}
+    \label{thm:SMP}
+    Assume $u\in C^{2}(U)\cap C^{1}(\bar{U})$ and $c\equiv 0$ in $U$, suppose also $U$ is connected, open and bounded. If $Lu\le 0$ in $U$ and $u$ attains its maximum over $\bar{U}$ at an interior point, then $u$ is constant within $U$.
+\end{theorem}
+\begin{remark}
+Theorem \ref{thm:SMP} is strictly stronger than theorem \ref{thm:WMP}. If $L$ satisfies the strong maximum principle, then the maximum of the function $u$ must be attained on the boundary $\partial U$. However, it should be noted that $\max_{U}u=\max_{\bar{U}}u$ does not imply that if $u$ attains its maximum value in $U$, then $u$ is constant.
+\end{remark}
+\begin{proof}
+    Write $M=\max_{\bar{U}}u$ and $C:=\{x\in U|u(x)=M\}$, assume that $C\neq\emptyset$. Then if $u\not\equiv M$, set 
+    \begin{equation}
+        V:=\{x\in U|u(x)<M\},
+    \end{equation}
+    then choose $y\in V$ such that $\text{dist}(y,C)<\text{dist}(y,\partial U)$, and let $B$ denote the largest ball with center $y$ whose interior lies in $V$, then there exists $x^{0}\in C\cap \partial B$. By Hopf's lemma, $\pdfFrac{u}{\nu}(x^{0})>0$. But on the other hand, $x^{0}\in C$ means $Du(x^{0})=\mathbf{0}$, contradict!
+\end{proof}
+\begin{remark}
+    If $c\ge 0$, $Lu\le 0$ in $U$, and $u$ attains its \textbf{non-negative} maximum over $\bar{U}$ at an interior point, then $u$ is constant within $U$.
+\end{remark}
+\section{Harnack's Inequality}
+Harnack's inequality states that the values of a nonnegative solution are comparable, i.e. if $u\ge 0$ and $u$ is the solution of elliptic equation $Lu=0$, the supremum of function $u$ can be controled by its infimum.
+\begin{theorem}{Harnack's inequality}
+    Assume $u\ge 0$ is a $C^{2}$ solution of $Lu=0$ in $U$, and suppose $V\subset\subset U$ is connected. Then there exists a constant $C$ such that 
+    \begin{equation}
+        \sup_{V}u\le C\inf_{V}u.
+    \end{equation}
+    The constant $C$ depends only on $V$ and the coefficients of $L$.
+\end{theorem}
+\textbf{The idea of this proof:} Without loss of generality, we assume that $u>0$ in $U$. Set $v(x):=\log u(x)$, choose $x\in V$, $y\in V$ and $x\neq y$, as $V$ is connected, there is a path comes through the point $x$ and $y$, marked as $l$. As $l$ is compact, there exists finite number of balls $B(x_{i},r_{i})$ such that $l\subset\cup_{i=1}^{N}B(x_{i},r_{i})$. If $\norm{Dv}_{L^{\infty}(V)}<\infty$, on the ball $B(x_{i},r_{i})$, choose $x,y\in B(x_{i},r_{i})\cap l$, we can see that 
+\begin{equation}
+    |v(x)-v(y)|\le N|Dv|r\le CNr,
+\end{equation}
+while $r$ means the length of the arc from $x$ to $y$. As the cover is finite, mark the arc length of $l$ is $s_{xy}$, we can see:
+\begin{equation}
+    \left|\frac{u(x)}{u(y)}\right|\le e^{|v(x)-v(y)|}\le e^{CNs_{xy}}\le C(V).
+\end{equation}
+So, it suffices to show that $\norm{Dv}_{L^{\infty}(V)}<\infty$.
+\begin{proof}
+    We just consider a simple case, i.e. $a^{ij}\in C^{\infty}(U)$ and $b^{i}\equiv 0, c\equiv 0$. As $u$ is the solution, we can see $\sum a^{ij}u_{x_{i}x_{j}}=0$, i.e. 
+    \begin{equation}
+        \label{eq:aux_v_satisfy}
+        \sum a^{ij}v_{x_{i}x_{j}}+a^{ij}v_{x_{i}}v_{x_{j}}=0.
+    \end{equation}
+    Then derive the expression for:
+    \begin{equation}
+        \label{eq:Dij}
+        a^{ij}D_{i}D_{j}|Dv|^{2}=\sum_{k=1}^{n}2a^{ij}(D_{i}D_{k}vD_{j}D_{k}v+D_{k}vD_{i}D_{j}D_{k}v).
+    \end{equation}
+    By \eqref{eq:aux_v_satisfy}, we can see:
+    \begin{equation}
+        \label{eq:diff_aux_v}
+        \sum_{i,j=1}^{n}\left(D_{k}a^{ij}v_{x_{i}x_{j}}+a^{ij}v_{x_{i}x_{j}x_{k}}+D_{k}a^{ij}D_{i}vD_{j}v+2a^{ij}D_{k}D_{i}vD_{j}v\right)=0.
+    \end{equation}
+    Combine \eqref{eq:diff_aux_v} and \eqref{eq:Dij}, we can see:
+    \begin{equation}
+        \begin{aligned}
+        \sum a^{ij}D_{i}D_{j}|Dv|^{2}&=\sum\left(2a^{ij}D_{i}D_{k}vD_{j}D_{k}v-2D_{k}vD_{k}a^{ij}\left(D_{i}D_{j}v+D_{i}vD_{j}v\right)-4D_{k}va^{ij}D_{k}D_{i}vD_{j}v\right)\\
+        &=\sum\left(2a^{ij}D_{i}D_{k}vD_{j}D_{k}v-2D_{k}vD_{k}a^{ij}\left(D_{i}D_{j}v+D_{i}vD_{j}v\right)-2a^{ij}D_{i}|Dv|^{2}D_{j}v\right).
+        \end{aligned}
+    \end{equation}
+    To be continued...
+\end{proof}
+\section{Eigenvalues and Eigenfunctions}
+In this section, we consider the boundary-value problem:
+\begin{equation}
+    \label{eq:eig-value_prob}
+    \left\{
+        \begin{aligned}
+            Lw&=\lambda w,x\in U;\\
+            w&=0,x\in\partial U,
+        \end{aligned}
+    \right.
+\end{equation}
+where $U$ is open and bounded, and we call $\lambda$ an \textbf{eigenvalue} of $L$ with a nontrivial \textbf{eigenfunction} $w$. Now, we will discuss the properties of operator $L$, its eigenvalues $\lambda$ and the corresponding eigenfunctions $w$.
+\subsection{Eigenvalues of symmetric elliptic operators}
+For simplicity, we consider now an elliptic operator having the divergence form:
+\begin{equation}
+    \label{eq:symmetric_elliptic}
+    Lu=-\sum_{i,j=1}^{n}\left(a^{ij}u_{x_{i}}\right)_{x_{j}},
+\end{equation}
+where $a^{ij}\in C^{\infty}(\bar{U})$. We suppose the coefficients $a^{ij}$ satisfy the symmetry condition $a^{ij}=a^{ji}$, then the operator $L$ is thus formally \textbf{symmetric}, and in particular the associated bilinear form $B[\;,\;]$ satisfies $B[u,v]=B[v,u]$. Assume also $U$ is connected.
+\begin{theorem}{Eigenvalues of symmetric elliptic operators}
+    \label{thm:eig_val_of_sym_op}
+    For the operator $L$ as \eqref{eq:symmetric_elliptic}:
+    \begin{itemize}
+        \item Each eigenvalue of $L$ is real.
+        \item If we repeat each eigenvalue according to its (finite) multiplicity, we have:
+        \begin{equation}
+            \label{eq:spectrum}
+            \Sigma=\{\lambda_{k}\}_{k=1}^{\infty}
+        \end{equation}
+        where 
+        \begin{equation}
+            0<\lambda_1\le\lambda_2\le\cdots
+        \end{equation}
+        and $\lim_{k\rightarrow\infty}\lambda_{k}=\infty$.
+        \item Finally, there exists an orthonormal basis $\{w_{k}\}_{k=1}^{\infty}$ of $L^{2}(U)$, where $w_{k}\in H_{0}^{1}(U)$ is an eigenfunction corresponding to $\lambda_{k}$:
+        \begin{equation}
+            \left\{
+                \begin{aligned}
+                    Lw_{k}&=\lambda_{k}w_{k},x\in U\\
+                    w_{k}&=0,x\in\partial U.
+                \end{aligned}
+            \right.
+        \end{equation}
+    \end{itemize}
+\end{theorem}
+\begin{remark}
+    Owing to the regularity theorem, $w_{k}\in C^{\infty}(U)$, and furthermore $\omega_{k}\in C^{\infty}(\bar{U})$ if $\partial U$ is smooth.
+\end{remark}
+\begin{proof}
+    First, by the form of operator $L$, we can see the corresponding bilinear form $B[u,v]$ of $L$ is \textbf{bounded} and \textbf{uniformly elliptic}. By the discussion about theorem \ref{thm:2nd_exist}, the operator $L$ is a linear, bounded bijective from $L^{2}(U)$ to $L^{2}(U)$, and its inverse operator $S:=L^{-1}$ is a compact operator.
+
+    Then, claim that $S$ is symmetric. First, if $Sf=u$, it means that 
+    \begin{equation}
+        \label{eq:Sf}
+        \left\{
+            \begin{aligned}
+                Lu&=f,x\in U;\\
+                u&=0,x\in\partial U,\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    and if $Sg=v$, it means that 
+    \begin{equation}
+        \label{eq:Sg}
+        \left\{
+            \begin{aligned}
+                Lv&=g,x\in U;\\
+                v&=0,x\in\partial U,\\
+            \end{aligned}
+        \right.
+    \end{equation}
+    then 
+    \begin{equation}
+        (Sf,g)=(u,g)=(u,Lv)=(Lv,u)=B[v,u],
+    \end{equation}
+    and 
+    \begin{equation}
+        (f,Sg)=(f,v)=(Lu,v)=B[u,v],
+    \end{equation}
+    as $B[u,v]=B[v,u]$, i.e. $(Sf,g)=(f,Sg)$, so $S$ is symmetric.
+
+    Notice that $(Sf,f)=(u,f)=(u,Lu)=B[u,u]\ge 0$, we can see $S$ is a positive operator. Then: we can see $S$ is \textbf{compact, symmetric, linear and positive}. By the property of compact and positive operator, we can see the eigenvalues of $S$ are all real, $\eta_{k}\rightarrow 0$, and the eigenvectors of $S$, marked as $\{w_{k}\}$, form an orthonormal basis of $L^{2}(U)$. As $S=L^{-1}$, $w_{k}$ is also the eigenfunction of $L$ with eigenvalue $\frac{1}{\eta_{k}}$. So the eigenvalues of $L$ satisfies $\lim_{k\rightarrow\infty}\lambda_{k}=\infty$, and the eigenfunctions $\{w_{k}\}$ form an orthonormal basis for $L^{2}(U)$.
+\end{proof}
+\begin{remark}
+    Specially, if $L=-\Delta$, and the region $U\subset\mathbb{R}^{n}$ is bounded and open, \textbf{Weyl's Law} asserts
+    \begin{equation}
+        \lim_{k\rightarrow\infty}\frac{\lambda_{k}^{\frac{n}{2}}}{k}=\frac{(2\pi)^{n}}{|U|\alpha(n)}. 
+    \end{equation}
+\end{remark}
+Now, we scrutinize more carefully the \textbf{first eigenvalue} of $L$.
+\begin{definition}
+    We call $\lambda_{1}>0$ the principal eigenvalue of $L$.
+\end{definition}
+\begin{theorem}{Variational principle for the principal eigenvalue}
+    \label{thm:variational_principle}
+    \begin{itemize}
+        \item We have 
+        \begin{equation}
+            \label{eq:principal_eig_value}
+            \lambda_{1}=\min\{B[u,u]|u\in H_{0}^{1}(U),\norm{u}_{L^{2}}=1\}.
+        \end{equation}
+        \item Furthermore, the above minimum is attained for a function $w_{1}$, positive within $U$, which solves 
+        \begin{equation}
+            \label{eq:eig_func_for_principal_eig}
+            \left\{
+                \begin{aligned}
+                Lw_{1}&=\lambda_{1}w_{1},x\in U;\\
+                w_{1}&=0,x\in\partial U.\\
+                \end{aligned}
+            \right.
+        \end{equation}
+        \item Finally, if $u\in H_{0}^{1}(U)$ is any weak solution of 
+        \begin{equation}
+            \left\{
+                \begin{aligned}
+                    Lu&=\lambda_{1}u,x\in U;\\
+                    u&=0,x\in\partial U,
+                \end{aligned}
+            \right.
+        \end{equation}
+        then $u$ is a multiple of $w_{1}$.
+    \end{itemize}
+\end{theorem}
+\begin{remark}
+    Theorem \ref{thm:variational_principle} suggests that the principal eigenvalue $\lambda_{1}$ is simple. 
+\end{remark}
+\begin{proof}
+    First, define $B[\;,\;]$ as an inner product in $H_{0}^{1}(U)$, find the \textbf{orthonormal basis} of the Hilbert space $H_{0}^{1}(U)$. By theorem \ref{thm:eig_val_of_sym_op}, the eigenfunctions $\{w_{k}\}$ form an orthonormal basis on $L^{2}(U)$, $\norm{w_{k}}_{L^{2}(U)}=1$, and 
+    \begin{equation}
+        \begin{aligned}
+        B[w_{k},w_{k}]&=\lambda_{k}\norm{w_{k}}_{L^{2}(U)}^{2}=\lambda_{k},\\
+        B[w_{k},w_{l}]&=0(k\neq l),\\
+        \end{aligned}
+    \end{equation}
+    so the set $\left\{\frac{w_{k}}{\lambda_{k}^{\frac{1}{2}}}\right\}_{k=1}^{\infty}$ forms an orthonormal subset of $H_{0}^{1}(U)$. Then we show this orthonormal subset is complete. Assume $u\in H_{0}^{1}(U)$ satisfies
+    \begin{equation}
+        B[u,w_{k}]=0,k=1,2,\cdots,
+    \end{equation}
+    as $\{w_{k}\}$ is an orthonormal basis in $L^{2}(U)$, by Fourier expansion:
+    \begin{equation}
+        u=\sum_{k=1}^{\infty}(u,w_{k})w_{k}:=\sum_{k=1}^{\infty}d_{k}w_{k}.
+    \end{equation}
+    Then $B[u,w_{k}]=0$ means that $\lambda_{k}d_{k}=0$, i.e. $d_{k}\equiv 0$, so $u\equiv 0$. Now the set $\left\{\frac{w_{k}}{\lambda_{k}^{\frac{1}{2}}}\right\}$ forms an orthonormal basis for $H_{0}^{1}(U)$ equipped with inner product $B[\;,\;]$.
+
+    Now, recall the expression $B[u,u]$. If $\norm{u}_{L^{2}(U)}=1$, write the Fourier expansion \textbf{on space $H_{0}^{1}(U)$} as $u=\sum_{k=1}^{\infty} d_{k}w_{k}$, with $\sum_{k=1}^{\infty} d_{k}^{2}=1$, we can see:
+    \begin{equation}
+        B[u,u]=B[\sum d_{k}w_{k},\sum d_{k}w_{k}]=\sum d_{k}^{2}\lambda_{k}\ge\lambda_{1},
+    \end{equation}
+    and the equality holds for $u=w_{1}$. We complete the proof of \eqref{eq:principal_eig_value}. 
+
+    Then, if $u$ satisfies \eqref{eq:eig_func_for_principal_eig}, i.e. $Lu=\lambda_{1}u$, and $\norm{u}_{L^{2}(U)}=1$, we can see $B[u,u]=(Lu,u)=\lambda_{1}\norm{u}_{L^{2}(U)}^{2}=\lambda_{1}$. On the other hand, if $B[u,u]=1$ and $\norm{u}_{L^{2}(U)}=1$, consider the Fourier series of $u$ as $u=\sum d_{k}u_{k}$ with $\sum d_{k}^{2}=1$, we have 
+    \begin{equation}
+        \sum d_{k}^{2}\lambda_{1}=\lambda_{1}=B[u,u]=\sum d_{k}^{2}\lambda_{k}.
+    \end{equation}
+    i.e. for $k\ge 2$, $d_{k}=(u,w_{k})=0$. By \textbf{Fredholm alternative}, the eigenvalue $\lambda_{1}$ has finite multiplicity, it follows that 
+    \begin{equation}
+        u=\sum_{k=1}^{m}(u,w_{k})w_{k}
+    \end{equation}
+    for $m<\infty$ and $Lw_{k}=\lambda_{1}w_{k}$. Therefore:
+    \begin{equation}
+        Lu=\sum_{k=1}^{m}(u,w_{k})Lw_{k}=\lambda_{1}u.
+    \end{equation}
+
+    Finally, we will show that the multiplicity of eigenvalue $\lambda_{1}$ is $1$. To show this result, we should derive the following lemma:
+    \begin{lemma}
+        If $u\in H_{0}^{1}(U)$ is a weak solution of \eqref{eq:eig_func_for_principal_eig}, $u\not\equiv 0$, then either $u>0$ in $U$ or $u<0$ in $U$.
+    \end{lemma}
+    \begin{proof}
+        Without loss of generality, assume $\norm{u}_{L^{2}(U)}=1$, mark $\alpha=\int_{U}(u^{+})^{2}\dif x$, $\beta=\int_{U}(u^{-})^{2}\dif x$, we can see $\alpha+\beta=1$. Then:
+        \begin{equation}
+            \lambda_{1}=B[u,u]=B[u^{+},u^{+}]+B[u^{-},u^{-}]\ge \lambda_{1}(\alpha+\beta)=\lambda_{1}.
+        \end{equation}
+        The equality holds, so $B[u^{+},u^{+}]=\lambda_{1}\norm{u^{+}}_{L^{2}(U)}^{2}$, and $B[u^{-},u^{-}]=\lambda_{1}\norm{u^{-}}_{L^{2}(U)}^{2}$. It means that $u^{+}$ and $u^{-}$ are both the weak solution of $Lu=\lambda_{1}u$. What's more, $Lu^{+}\ge 0$, by strong maximum principle, $u^{+}>0$ in $U$ or $u^{+}\equiv 0$ in $U$. Similar arguments apply to $u^{-}$. So either $u>0$ in $U$ or $u<0$ in $U$.
+    \end{proof}
+    Back to the proof of main theorem. If $u$ and $\tilde{u}$ are both nontrivial solution of equation \eqref{eq:eig_func_for_principal_eig}, by the above lemma, $\int_{U}u\dif x\neq 0$ and $\int_{U}\tilde{u}\dif x\neq 0$. So $\exists k\in\mathbb{R}$ such that $\int_{U}(u-k\tilde{u})\dif x=0$. On the other hand, $u-k\tilde{u}$ still satisfies equation \eqref{eq:eig_func_for_principal_eig} and $\int_{U}(u-k\tilde{u})\dif x=0$, by the above lemma, we can see $u-k\tilde{u}\equiv 0$. So $u=k\tilde{u}$ in $U$. Hence the eigenvalue $\lambda_{1}$ is simple.
+\end{proof}
+\section{Eigenvalues of nonsymmetric elliptic operators}
+Now consider a uniformly elliptic operator $L$ in the nondivergence form:
+\begin{equation}
+    Lu=-\sum_{i,j=1}^{n}a^{ij}u_{x_{i}x_{j}}+\sum_{i=1}^{n}b^{i}u_{x_{i}}+cu.
+\end{equation}
+Suppose that $a^{ij},b^{i},c\in C^{\infty}(\bar{U})$ and $U$ is open, bounded and connected, assume $a^{ij}=a^{ji}$ and $c\ge 0$ in $U$. In this condition, the operator $L$ is no longer symmetry, i.e. $L$ will in general have complex eigenvalues and eigenfunctions. However, there are still some properties about the principal eigenvalue of $L$.
+\begin{theorem}{Principal eigenvalue for nonsymmetric elliptic operators}
+    \begin{itemize}
+        \item There exists a real eigenvalue $\lambda_{1}$ for the operator $L$, taken with zero boundary conditions, such that if $\lambda\in\mathbb{C}$ is any other eigenvalue, we have $\Re(\lambda)\ge\lambda_{1}$.
+        \item There exists a corresponding eigenfunction $w_{1}$, which is positive within $U$.
+        \item The eigenvalue $\lambda_{1}$ is simple.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    skip.
 \end{proof}
