@@ -1335,3 +1335,89 @@ Suppose that $a^{ij},b^{i},c\in C^{\infty}(\bar{U})$ and $U$ is open, bounded an
 \begin{proof}
     skip.
 \end{proof}
+\section{Exercises}
+\begin{exercise}
+    $u\in H^{1}(\mathbb{R}^{n})$ have compact support and be a weak solution of 
+    \begin{equation}
+        -\Delta u+c(u)=f,
+    \end{equation}    
+    where $f\in L^{2}(\mathbb{R}^{n})$, $c:\mathbb{R}\rightarrow\mathbb{R}$ smooth, $c(0)=0$, $c'(0)\ge 0$, and $c(u)\in L^{2}(\mathbb{R}^{n})$. Derive the estimate:
+    \begin{equation}
+        \norm{D^{2}u}_{L^{2}(\mathbb{R}^{n})}\le C\norm{f}_{L^{2}(\mathbb{R}^{n})}.
+    \end{equation}
+\end{exercise}
+\begin{solution}
+    Assume $\text{supp}u=\Omega$ is a convex compact subset of $\mathbb{R}^{n}$, by the definition of weak solution, $\forall v\in H_{0}^{1}(\Omega)$, we have:
+    \begin{equation}
+        \label{eq:weak_form}
+        \int_{\Omega}-\Delta uv+c(u)v\dif x=\int_{\Omega}fv\dif x.
+    \end{equation}
+    By Gauss-Green formula and $v=0$ on $\partial\Omega$, we can see:
+    \begin{equation}
+        \label{eq:modified_form}
+        \int_{\Omega}\nabla v\cdot\nabla u\dif x=\int_{\Omega}(f-c(u))v\dif x.
+    \end{equation}
+    Mark $A:=\int_{\Omega}\nabla v\cdot\nabla u\dif x$, $B:=\int_{\Omega}(f-c(u))v\dif x$, and choose $v=-D_{k}^{-h}\left(D_{k}^{h}u\right)(1\le k\le n)$, we can see:
+    \begin{equation}
+        \label{eq:approx_A}
+        \begin{aligned}
+            A&=\sum_{i=1}^{n}\int_{\Omega}v_{x_{i}}u_{x_{i}}\dif x\\
+            &=-\sum_{i=1}^{n}\int_{\Omega}\left(D_{k}^{-h}\left(D_{k}^{h}u\right)\right)_{x_{i}}u_{x_{i}}\dif x\\
+            &=\sum_{i=1}^{n}\int_{\Omega}\left(D_{k}^{h}u\right)_{x_{i}}\left(D_{k}^{h}u\right)_{x_{i}}\dif x\\
+            &=\norm{D_{k}^{h}Du}_{L^2}^2.
+        \end{aligned}
+    \end{equation} 
+    Then mark $B_{1}:=\int_{\Omega}fv\dif x$, $B_{2}:=-\int_{\Omega}c(u)v\dif x$, we can see $B=B_{1}+B_{2}$. By Cauchy-Schwarz inequality:
+    \begin{equation}
+        \label{eq:approx_B1}
+        B_{1}\le \norm{f}_{L^2}\norm{v}_{L^2}\le C\norm{f}_{L^2}\norm{D_{k}^{h}Du}_{L^2}.
+    \end{equation}
+    And:
+    \begin{equation}
+        \label{eq:approx_B2}
+        \begin{aligned}
+            B_{2}=-\int_{\Omega}c(u)v\dif x&=-\int_{\Omega}D_{k}^{h}(c(u))D_{k}^{h}u\dif x\\
+            &=-\int_{\Omega}\frac{u(x+he_{k})-u(x)}{h}\frac{c(u(x+he_{k}))-c(u(x))}{h}\dif x\\
+            &=-\int_{\Omega}\left(\frac{u(x+he_{k})-u(x)}{h}\right)^2c'(\xi(x))\dif x\\
+            &\le 0,
+        \end{aligned}
+    \end{equation}
+    while the third equality holds from the mean value theorem on convex region, and the final inequality holds from the condition $c'\ge 0$.
+
+    So: $\forall 1\le k\le n$, we can see:
+    \begin{equation}
+        \norm{D_{k}^{h}Du}_{L^2}\le C_{k}\norm{f}_{L^{2}}.
+    \end{equation}
+    Set $h\rightarrow 0$, we can derive the result 
+    \begin{equation}
+        \norm{D^{2}u}_{L^2}\le C\norm{f}_{L^2}.
+    \end{equation}
+\end{solution}
+\begin{exercise}
+    Assume $u$ is a smooth solution of $Lu=-\sum_{i,j=1}^{n}a^{ij}u_{x_{i}x_{j}}=f$ in $U$, $u=0$ on $\partial U$, where $f$ is bounded. Fix $x^{0}\in\partial U$. A barrier at $x^{0}$ is a $C^{2}$ function $w$ such that
+    \begin{equation}
+        Lw\ge 1(x\in U),w(x^{0})=0,w\ge 0(x\in\partial U).
+    \end{equation}
+    Show that if $w$ is a barrier at $x^{0}$, there exists a constant $C$ such that:
+    \begin{equation}
+        |Du(x^{0})|\le C\left|\pdfFrac{w}{\nu}(x^{0})\right|.
+    \end{equation}
+\end{exercise}
+\begin{solution}
+    First, set $\varphi_{1}:=u+w\norm{f}_{L^{\infty}}$, we can see:
+    \begin{equation}
+        L\varphi_{1}=f+\norm{f}_{\infty}Lw\ge 0,
+    \end{equation}
+    and $\varphi_{1}|_{\partial\Omega}\ge 0$. By weak maximum principle, $\min_{\bar{U}}\varphi_{1}=0$. 
+
+    Then, set $\varphi_{2}:=u-w\norm{f}_{L^{\infty}}$, we can see:
+    \begin{equation}
+        L\varphi_{2}=f-\norm{f}_{\infty}Lw\le 0,
+    \end{equation}
+    and $\varphi_{2}|_{\partial\Omega}\le 0$. By weak maximum principle, $\max_{\bar{U}}\varphi_{2}=0$. By Hopf's lemma, $\pdfFrac{\varphi_{1}}{\nu}(x_{0})\le 0$, $\pdfFrac{\varphi_{2}}{\nu}(x_{0})\ge 0$.
+
+    What's more, $u|_{\partial\Omega}=0$, i.e. $\nabla u\parallel \nu$. So there exists $C>0$ such that 
+    \begin{equation}
+        |Du(x_{0})|\le C\left|\pdfFrac{w}{\nu}(x_{0})\right|.
+    \end{equation}
+\end{solution}
