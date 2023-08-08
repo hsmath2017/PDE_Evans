@@ -1421,3 +1421,202 @@ Suppose that $a^{ij},b^{i},c\in C^{\infty}(\bar{U})$ and $U$ is open, bounded an
         |Du(x_{0})|\le C\left|\pdfFrac{w}{\nu}(x_{0})\right|.
     \end{equation}
 \end{solution}
+\begin{exercise}
+    Assume $U$ is connected. Use (a) energy methods and (b) the maximum principle to show that the only smooth solutions of the Neumann boundary-value problem
+    \begin{equation}
+        \left\{
+            \begin{aligned}
+                -\Delta u&=0,x\in U;\\
+                \pdfFrac{u}{\nu}&=0,x\in\partial U
+            \end{aligned}
+        \right.
+    \end{equation}
+    are $u\equiv C$, for some constant $C$.
+\end{exercise}
+\begin{solution}
+    (a)Energy method: as $\Delta u=0$ and $\left.\pdfFrac{u}{\nu}\right|_{\partial U}\equiv 0$, we can see:
+    \begin{equation}
+        0=-\int_{U}u\Delta u\dif x=\int_{U}|\nabla u|^{2}\dif x-\int_{U}u\pdfFrac{u}{\nu}\dif S=\int_{U}|\nabla u|^{2}\dif x.
+    \end{equation}
+    It means that $\nabla u\equiv 0$ a.e. And $u$ is smooth, so $u\equiv C$.
+
+    (b)The maximum principle: First, we derive the WMP. Set $\varphi:=u+\epsilon |x|^{2}$, we can see $-\Delta\varphi=-\Delta u-\Delta(\epsilon |x|^2)=-2n\epsilon<0$, and $\pdfFrac{\varphi}{\nu}=\epsilon\pdfFrac{|x|^2}{\nu}>0$, then $\max_{\bar{U}}\varphi=\max_{\partial U}\varphi$, i.e.:
+    \begin{equation}
+        u(x)+\epsilon |x|^{2}\le\max_{x\in\partial U}u(x)+\epsilon d^{2},
+    \end{equation}
+    while $d$ is the diagram of region $U$. Choose $\epsilon\rightarrow 0$, we get the weak maximum principle (WMP) of $u$. Then derive the strong maximum principle. Set:
+    \begin{equation}
+        \begin{aligned}
+            V&:=\{x\in U|u(x)<M\},\\
+            C&:=\{x\in U|u(x)=M\},
+        \end{aligned}
+    \end{equation}
+    choose $x\in V$, construct a ball $B(x)$ such that $B(x)\cap C=\{x^{0}\}$ or $B(x)\cap \partial U=\{x^{0}\}$. By Hopf's lemma, $\pdfFrac{u}{\nu}(x^{0})>0$. If $x^{0}\in\partial C$, contradict to $u(x)\equiv M$; if $x^{0}\in\partial U$, contradict to the boundary condition. So $u\equiv C$.
+\end{solution}
+\begin{exercise}
+    Assume $u\in H^{1}(U)$ is a bounded weak solution of equation 
+    \begin{equation}
+        -\sum_{i,j}\left(a^{ij}u_{x_{i}}\right)_{x_{j}}=0,x\in U.
+    \end{equation}
+    Let $\phi:\mathbb{R}\rightarrow\mathbb{R}$ be convex and smooth, and set $w=\phi(u)$. Show $w$ is a weak subsolution, i.e. $B[w,v]\le 0$ for all $v\in H_{0}^{1}(U),v\ge 0$. 
+\end{exercise}
+\begin{solution}
+    By the definition of weak solution, we can see:
+    \begin{equation}
+        \begin{aligned}
+            B[\phi(u),v]&=\sum_{i,j}\int_{V}a^{ij}\phi'(u)u_{x_{i}}v_{x_{j}}\dif x\\
+            &=\sum_{i,j}\int_{V}a^{ij}u_{x_{i}}\pdfFrac{(\phi'(u)v)}{x_{j}}\dif x-\sum_{i,j}\int_{V}a^{ij}u_{x_{i}}v\phi''(u)u_{x_{j}}\dif x\\
+            &=-\sum_{i,j}\int_{V}a^{ij}u_{x_{i}}u_{x_{j}}v\phi''(u)\dif x\\
+            &\le-\theta\int_{V}v\phi''(u)|\nabla u|^{2}\dif x\le 0.
+        \end{aligned}
+    \end{equation}
+While the second equation follows from integration by parts, the third equation follows from the fact that $u$ is a bounded weak solution, and the final step comes from the uniform elliptic condition.
+\end{solution}
+\begin{exercise}
+We say that the uniformly elliptic operator 
+\begin{equation}
+    Lu=-\sum a^{ij}u_{x_{i}x_{j}}+\sum b^{i}u_{x_{i}}+cu
+\end{equation}
+satisfies the weak maximum principle if for all $u\in C^{2}(U)\cap C^{1}(\bar{U})$, 
+\begin{equation}
+    \left\{
+        \begin{aligned}
+            Lu&\le 0,x\in U\\
+            u&\le 0,x\in\partial U\\
+        \end{aligned}
+    \right.
+\end{equation}
+implies that $u\le 0$ in $U$. Suppose that there exists a function $v\in C^{2}(U)\cap C^{1}(\bar{U})$ such that $Lv\ge 0$ in $U$ and $v>0$ on $\bar{U}$. Show that $L$ satisfies the weak maximum principle.
+\end{exercise}
+\begin{solution}
+    Set $w=\frac{u}{v}$, derive $a^{ij}w_{ij}$ as:
+    \begin{equation}
+        a^{ij}w_{ij}=a^{ij}\left[\frac{vu_{ij}-uv_{ij}}{v^2}+\frac{2uv_{i}v_{j}-2vu_{j}v_{i}}{v^3}+\frac{u_{j}v_{i}-u_{i}v_{j}}{v^2}\right].
+    \end{equation}
+    Sum them up, we can see:
+    \begin{equation}
+        \label{eq:auxiliary_op}
+        -\sum a^{ij}w_{ij}=\sum\frac{ua^{ij}v_{ij}}{v^2}-\sum\frac{va^{ij}u_{ij}}{v^2}+\frac{2}{v^3}\sum\left(a^{ij}vu_{j}v_{i}-a^{ij}uv_{i}v_{j}\right).
+    \end{equation}
+    On the region $\{u>0\}$, by the condition $-\sum a^{ij}v_{ij}+\sum b^{i}v_{i}+cv>0$, $-\sum a^{ij}u_{ij}+\sum b^{i}u_{i}+cu\le 0$, then estimate \eqref{eq:auxiliary_op}, we have:
+    \begin{equation}
+        \begin{aligned}
+            -\sum a^{ij}w_{ij}&\le \frac{u}{v^2}\left(\sum b^{i}v_{i}+cv\right)-\frac{1}{v}\left(\sum b^{i}u_{i}+cu\right)+\frac{2}{v^3}\sum a^{ij}v_{i}(vu_{j}-uv_{j})\\
+            &=\sum \frac{b^{j}}{v^2}\left(uv_{j}-vu_{j}\right)-\frac{2}{v^{3}}\sum a^{ij}v_{i}\left(uv_{j}-vu_{j}\right)\\
+            &=\sum\left(\frac{b^j}{v^2}-\frac{2}{v^3}\sum a^{ij}v_{i}\right)\left(uv_{j}-vu_{j}\right)\\
+            &=\sum\left(\frac{2}{v}\sum a^{ij}v_{i}-b^{j}\right)w_{j}.
+        \end{aligned}
+    \end{equation} 
+    So if we define:
+    \begin{equation}
+        Mw:=-\sum a^{ij}w_{ij}+\sum\left(b^{j}-\frac{2}{v}\sum a^{ij}v_{i}\right)w_{j},
+    \end{equation}
+    we can see $Mw\le 0$ on the region $\{u>0\}$. $L$ is uniformly elliptic means that $M$ is uniformly elliptic, so the operator $M$ satisfies weak maximum principle. If $\{u>0\}\neq\emptyset$, mark $\Omega:=\{x|u(x)>0\}$, $Mw\le 0$ means $0<\sup_{\bar{\Omega}}w=\sup_{\partial\Omega}w=0$, contradict!
+
+    So $\Omega=\emptyset$, i.e. $L$ satisfies weak maximum principle.
+\end{solution}
+\begin{exercise}
+    Let $Lu=-\sum_{i,j=1}^{n}\left(a^{ij}u_{x_{i}}\right)_{x_{j}}$, where $(a^{ij})$ is symmetric. Assume the operator $L$ with zero boundary conditions has eigenvalues $0<\lambda_{1}\le\lambda_{2}\le\cdots$.Show:
+    \begin{equation}
+        \label{eq:minimax}
+        \lambda_{k}=\max_{S\in\Sigma_{k-1}}\min_{u\in S^{\bot},\norm{u}_{L^{2}}=1}B[u,u].
+    \end{equation}
+    Here $\Sigma_{k-1}$ means the collection of $(k-1)$-dimensional subspaces of $H_{0}^{1}(U)$.
+\end{exercise}
+\begin{solution}
+    By theorem \ref{thm:eig_val_of_sym_op}, $\exists$ an orthogonal basis $\{u_{i}\}$ for Hilbert space $H_{0}^{1}(U)$, such that 
+    \begin{equation}
+        \begin{aligned}
+            Lu_{i}&=\lambda_{i}u_{i},\\
+            B[u_{i},u_{j}]&=\lambda_{i}\delta_{ij},\\
+            \innerprod{u_{i}}{u_{j}}_{L^{2}(U)}&=\delta_{ij}.\\
+        \end{aligned}
+    \end{equation} 
+    Assume $\norm{u}_{L^{2}}=1$, write $u=\sum r_{i}u_{i}$, we can see $\sum r_{i}^{2}=1$. Then:
+    \begin{equation}
+        B[u,u]=B\left[\sum r_{i}u_{i},\sum r_{i}u_{i}\right]=\sum\lambda_{i}r_{i}^{2}.
+    \end{equation}
+    Set the subspace $S_{0}:=\text{sp}\{u_{1},\cdots,u_{k-1}\}$, $S_{1}:=\text{sp}\{u_{1},\cdots,u_{k}\}$, then $S^{\bot}\cap S_{1}\neq\emptyset$. Choose $\tilde{u}\in S^{\bot}\cap S_{1}$, we can see 
+    \begin{equation}
+        B[\tilde{u},\tilde{u}]=\sum_{i=1}^{k}\lambda_{i}r_{i}^{2}\le\lambda_{k}.
+    \end{equation}
+    So the right hand of equation \eqref{eq:minimax} is less or equal to $\lambda_{k}$. On the other hand, if we choose $\Sigma_{k-1}=S_{0}$, as $B[u_{k},u_{k}]=\lambda_{k}$, the "=" can be satisfied. Now, we complete the proof.
+\end{solution}
+\begin{exercise}
+    Let $\lambda_{1}$ be the principal eigenvalue of the uniformly elliptic, nonsymmetric operator
+    \begin{equation}
+        Lu=-\sum a^{ij}u_{x_{i}x_{j}}+\sum b^{i}u_{x_{i}}+cu,
+    \end{equation}
+    taken with zero boundary conditions. Prove the max-min representation formula 
+    \begin{equation}
+        \lambda_{1}=\sup_{u}\inf_{x}\frac{Lu(x)}{u(x)},
+    \end{equation}
+    the "sup" taken over functions $u\in C^{\infty}(\bar{U})$ with $u>0$ in $U$, $u=0$ on $\partial U$, and the "inf" taken over points $x\in U$.
+\end{exercise}
+\begin{solution}
+    Set $X:=\{u\in C^{\infty}(\bar{U}):u>0(x\in U),u=0(x\in\partial U)\}$. Assume $w_{1}\in H^{1}(U)$, $w_{1}>0$ is the eigenfunction related to $\lambda_{1}$, choose $\{u_{n}\}\subset X$ such that $u_{n}\rightarrow w_{1}$ in $H^{1}(U)$, then 
+    \begin{equation}
+    \sup_{u}\inf_{x}\frac{Lu(x)}{u(x)}\ge\inf_{x}\frac{Lu_{n}(x)}{u_{n}(x)}.
+    \end{equation}
+    Set $n\rightarrow\infty$, we can see that 
+    \begin{equation}
+        \sup_{u}\inf_{x}\frac{Lu(x)}{u(x)}\ge\lambda_{1}.
+    \end{equation}
+    Then it suffices to show $\sup_{u}\inf_{x}\frac{Lu(x)}{u(x)}\le\lambda_{1}$, i.e. $\inf_{x\in U}(Lu-\lambda_{1}u)\le 0$. As $\lambda_{1}\in\mathbb{R}$, by the definition of dual operator, $\lambda_{1}$ is also the principal eigenvalue of operator $L^{*}$, i.e. $\exists w_{1}^{*}>0$ such that $L^{*}w_{1}^{*}=\lambda_{1}w_{1}^{*}$. Then:
+    \begin{equation}
+        \innerprod{Lu-\lambda_{1}u}{w_{1}^{*}}=\innerprod{u}{L^{*}w_{1}^{*}-\lambda_{1}w_{1}^{*}}=\innerprod{u}{0}=0.
+    \end{equation}
+    As $w_{1}^{*}>0$, if $Lu-\lambda_{1}u>0$, then $\innerprod{Lu-\lambda_{1}u}{w_{1}^{*}}>0$, contradict! So $\inf_{x\in U}(Lu-\lambda_{1}u)\le 0$.
+\end{solution}
+\begin{exercise}
+(Eigenvalues and domain variations) Consider a family of smooth, bounded domains $U(\tau)\subset\mathbb{R}^{n}$ that depend smoothly upon the param
+eter $\tau\in\mathbb{R}$. As $\tau$ changes, each points on $\partial U(\tau)$ moves with velocity $\mathbf{v}$.
+
+For each $\tau$, we consider eigenvalues $\lambda=\lambda(\tau)$ and corresponding eigenfunctions $w=w(x,\tau)$:
+\begin{equation}
+    \label{eq:eig_prob_for_variable_domains}
+    \left\{
+    \begin{aligned}
+        -\Delta w&=\lambda w, x\in U(\tau),\\
+        w&=0,x\in\partial U(\tau),\\
+    \end{aligned}
+    \right.
+\end{equation}
+normalized so that $\norm{w}_{L^{2}(U(\tau))}=1$. Suppose that $\lambda$ and $w$ are smooth functions of $\tau$ and $x$, prove \textbf{Hadamard's variational formula}
+\begin{equation}
+    \label{eq:Hvf}
+    \frac{\dif \lambda(\tau)}{\dif\tau}=-\int_{\partial U(\tau)}\left|\pdfFrac{w}{\nu}\right|^{2}\mathbf{v}\cdot\nu\dif S.
+\end{equation}
+\end{exercise}
+\begin{solution}
+    By \eqref{eq:eig_prob_for_variable_domains}, we can see:
+    \begin{equation}
+        \int_{U(\tau)}-w\Delta w\dif x=\int_{U(\tau)}\lambda(\tau)w^{2}\dif x.
+    \end{equation}
+    By the boundary conditions and Gauss-Green formula:
+    \begin{equation}
+        f(\tau)=\int_{U(\tau)}\left(|\nabla w|^{2}-\lambda(\tau)w^{2}\right)\dif x\equiv 0.
+    \end{equation}
+    For $\norm{w}_{L^{2}}=1$, it means that $\lambda(\tau)=\int_{U(\tau)}|\nabla w|^{2}\dif x$. Then, by \textbf{Reynold's transport theorem}:
+    \begin{equation}
+        \begin{aligned}
+            \frac{\dif \lambda(\tau)}{\dif\tau}&=\int_{\partial U(\tau)}|\nabla w|^{2}\mathbf{v}\cdot\nu\dif S+\int_{U(\tau)}\pdfFrac{|\nabla w|^{2}}{\tau}\dif x\\
+            &=\int_{\partial U(\tau)}\left|\pdfFrac{w}{\nu}\right|^{2}\mathbf{v}\cdot\nu\dif S+2\int_{U(\tau)}\nabla w\cdot\nabla w_{t}\dif x.
+        \end{aligned}
+    \end{equation}
+    On the other hand:
+    \begin{equation}
+        \begin{aligned}
+            &2\int_{U(\tau)}\nabla w\cdot\nabla w_{\tau}\dif x\\
+            =&2\int_{U(\tau)}\nabla\cdot(w\nabla w_{\tau})\dif x-2\int_{U(\tau)}w\Delta w_{\tau}\dif x\\
+            =&-2\int_{U(\tau)}w\pdfFrac{\Delta w}{\tau}\dif x\\
+            =&2\int_{U(\tau)}w\pdfFrac{\lambda(\tau)w}{\tau}\dif x\\
+            =&2\lambda'(\tau)\int_{U(\tau)}w^{2}\dif x+2\int_{U(\tau)}\lambda(\tau)w\pdfFrac{w}{\tau}\dif x\\
+            =&2\lambda'(\tau)+2\int_{U(\tau)}\lambda w\pdfFrac{w}{\tau}\dif x=2\lambda'(\tau).
+        \end{aligned}
+    \end{equation}
+    So:
+    \begin{equation}
+        \frac{\dif \lambda(\tau)}{\dif \tau}=-\int_{\partial U(\tau)}\lambda(\tau)w^{2}\dif x.
+    \end{equation}
+\end{solution}

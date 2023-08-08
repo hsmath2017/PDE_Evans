@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -160,8 +163,12 @@
 \newlabel{eq:approx_A}{{1.167}{23}{Exercises}{equation.1.9.167}{}}
 \newlabel{eq:approx_B1}{{1.168}{23}{Exercises}{equation.1.9.168}{}}
 \newlabel{eq:approx_B2}{{1.169}{23}{Exercises}{equation.1.9.169}{}}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{25}{chapter*.2}\protected@file@percent }
+\newlabel{eq:auxiliary_op}{{1.186}{25}{Exercises}{equation.1.9.186}{}}
+\newlabel{eq:minimax}{{1.189}{26}{Exercises}{equation.1.9.189}{}}
+\newlabel{eq:eig_prob_for_variable_domains}{{1.198}{27}{Exercises}{equation.1.9.198}{}}
+\newlabel{eq:Hvf}{{1.199}{27}{Exercises}{equation.1.9.199}{}}
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{28}{chapter*.2}\protected@file@percent }
 \abx@aux@read@bbl@mdfivesum{00D24FA2FA5AD0C5B607A637FBA9B13B}
 \abx@aux@defaultrefcontext{0}{evans2022partial}{nty/global//global/global}
 \abx@aux@defaultlabelprefix{0}{evans2022partial}{}
-\gdef \@abspage@last{27}
+\gdef \@abspage@last{30}

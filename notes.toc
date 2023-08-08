@@ -17,4 +17,4 @@
 \contentsline {subsection}{\numberline {1.7.1}Eigenvalues of symmetric elliptic operators}{20}{subsection.1.7.1}%
 \contentsline {section}{\numberline {1.8}Eigenvalues of nonsymmetric elliptic operators}{22}{section.1.8}%
 \contentsline {section}{\numberline {1.9}Exercises}{23}{section.1.9}%
-\contentsline {chapter}{Bibliography}{25}{chapter*.2}%
+\contentsline {chapter}{Bibliography}{28}{chapter*.2}%
