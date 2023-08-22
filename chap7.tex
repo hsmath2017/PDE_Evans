@@ -180,3 +180,57 @@ In this section, we need some uniform estimates for the $L^{2}$ norm of $\mathbf
         \max_{0\le t\le T}\norm{\mathbf{u}_{m}(t)}_{L^{2}(U)}+\norm{\mathbf{u}_{m}}_{L^{2}(0,T;H_{0}^{1}(U))}+\norm{\mathbf{u}'_{m}}_{L^{2}(0,T;H^{-1}(U))}\le C\left(\norm{\mathbf{f}}_{L^{2}(0,T;L^{2}(U))}+\norm{g}_{L^{2}(U)}\right).
     \end{equation}
 \end{theorem}
+\begin{proof}
+    First, by equation \eqref{eq:main_function}, we can see that 
+    \begin{equation}
+        \label{eq:variation_for_um}
+        (\mathbf{u}'_{m},\mathbf{u}_{m})+B[\mathbf{u}_{m},\mathbf{u}_{m};t]=(\mathbf{f},\mathbf{u}_{m})
+    \end{equation}
+    for a.e. $0\le t\le T$. By the energy estimate for elliptic operator \eqref{eq:elliptic_B}, we can see:
+    \begin{equation}
+        \label{eq:parabolic_B}
+        \beta\norm{\mathbf{u}_{m}}_{H_{0}^{1}(U)}^{2}\le B[\mathbf{u}_{m},\mathbf{u}_{m};t]+\gamma\norm{\mathbf{u}_{m}}_{L^{2}(U)}^{2}.
+    \end{equation}
+    So:
+    \begin{equation}
+        \frac{1}{2}\frac{\dif \norm{\mathbf{u}_{m}}_{L^{2}(U)}^{2}}{\dif t}+\beta\norm{\mathbf{u}_{m}}_{H_{0}^{1}(U)}^{2}\le\gamma\norm{\mathbf{u}_{m}}_{L^{2}(U)}^{2}+(\mathbf{f},\mathbf{u}_{m}).
+    \end{equation}
+    By Cauchy-Schwarz inequality, write $\eta(t):=\norm{\mathbf{u}_{m}(t)}_{L^{2}(U)}^{2}$, $\xi(t):=\norm{\mathbf{f}(t)}_{L^{2}(U)}^{2}$, we can see:
+    \begin{equation}
+        \eta'(t)\le C_{1}\eta(t)+C_{2}\xi(t).
+    \end{equation}
+    Thus, by Gronwall's inequality:
+    \begin{equation}
+        \eta(t)\le e^{C_{1}t}\left(\eta(0)+C_{2}\int_{0}^{t}\xi(\tau)\dif\tau\right).
+    \end{equation}
+    By the definition, $\eta(0)\le\norm{g}_{L^{2}(U)}^{2}$, i.e. 
+    \begin{equation}
+        \label{eq:estimate_um}
+        \max_{0\le t\le T}\norm{\mathbf{u}_{m}}_{H_{0}^{1}(U)}^{2}\le C\left(\norm{g}_{L^{2}(U)}^{2}+\norm{\mathbf{f}}_{L^{2}(0,T;L^{2}(U))}^{2}\right).
+    \end{equation}
+    Then, consider $\norm{\mathbf{u}_{m}}_{L^{2}(0,T;H_{0}^{1}(U))}^{2}$, by equation \eqref{eq:estimate_um}, we can see:
+    \begin{equation}
+        \begin{aligned}
+            \norm{\mathbf{u}_{m}}_{L^{2}(0,T;H_{0}^{1}(U))}^{2}&=\int_{0}^{T}\norm{\mathbf{u}_{m}(t)}_{H_{0}^{1}(U)}^{2}\dif t\\
+            &\le \int_{0}^{T}C_{1}\norm{\mathbf{f}(t)}_{L^{2}(U)}^{2}+C_{2}\norm{\mathbf{u}_{m}(t)}_{L^{2}(U)}^{2}+C_{3}\frac{\dif \norm{\mathbf{u}_{m}}_{L^{2}(U)}^{2}}{\dif t}\dif t\\
+            &\le C\left(\norm{g}_{L^{2}(U)}^{2}+\norm{\mathbf{f}}_{L^{2}(0,T;L^{2}(U))}^{2}\right).
+        \end{aligned}
+    \end{equation}
+    Finally, fix any $v\in H_{0}^{1}(U)$ with $\norm{v}_{H_{0}^{1}(U)}\le 1$ and write $v=v^{1}+v^{2}$, where $v^{1}\in\text{span}\{w_{k}\}_{k=1}^{m}$ and $(v^{2},w_{k})=0$. Since $\{w_{k}\}_{k=0}^{\infty}$ are orthogonal in $H_{0}^{1}(U)$, and $\norm{v^{1}}_{H_{0}^{1}(U)}\le\norm{v}_{H_{0}^{1}(U)}\le 1$. By \eqref{eq:main_function}, for a.e. $0\le t\le T$, we have:
+    \begin{equation}
+        (\mathbf{u}'_{m},v^{1})+B[\mathbf{u}_{m},v^{1};t]=(\mathbf{f},v^{1}).
+    \end{equation}
+    Then:
+    \begin{equation}
+        \innerprod{\mathbf{u}'_{m}}{v}=(\mathbf{u}'_{m},v^{1})=\innerprod{\mathbf{f}}{v^{1}}-B[\mathbf{u}_{m},v^{1};t].
+    \end{equation}
+    Consequently:
+    \begin{equation}
+        \norm{\mathbf{u}'_{m}}_{H^{-1}(U)}\le C\left(\norm{f}_{L^{2}(U)}+\norm{\mathbf{u}_{m}}_{H_{0}^{1}(U)}\right),
+    \end{equation}
+    and therefore:
+    \begin{equation}
+        \int_{0}^{T}\norm{\mathbf{u}'_{m}}_{H^{-1}(U)}^{2}\le C\left(\norm{g}_{L^{2}(U)}^{2}+\norm{\mathbf{f}}_{L^{2}(0,T;L^{2}(U))}^{2}\right).
+    \end{equation}
+    Q.E.D.
+\end{proof}
