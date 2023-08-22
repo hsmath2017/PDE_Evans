@@ -17,4 +17,13 @@
 \contentsline {subsection}{\numberline {1.7.1}Eigenvalues of symmetric elliptic operators}{20}{subsection.1.7.1}%
 \contentsline {section}{\numberline {1.8}Eigenvalues of nonsymmetric elliptic operators}{22}{section.1.8}%
 \contentsline {section}{\numberline {1.9}Exercises}{23}{section.1.9}%
-\contentsline {chapter}{Bibliography}{28}{chapter*.2}%
+\contentsline {chapter}{\numberline {2}Linear Evolution Equations}{28}{chapter.2}%
+\contentsline {section}{\numberline {2.1}The space $H^{-1}(U)$}{28}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Second-order Parabolic Equations}{28}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Definitions}{29}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Parabolic equations}{29}{subsubsection.2.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Weak solutions}{29}{subsubsection.2.2.1.2}%
+\contentsline {subsection}{\numberline {2.2.2}Existence and Uniqueness}{30}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Galerkin approximations}{30}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Energy estimates}{31}{subsubsection.2.2.2.2}%
+\contentsline {chapter}{Bibliography}{32}{chapter*.2}%

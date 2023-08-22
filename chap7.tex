@@ -1,0 +1,182 @@
+\chapter{Linear Evolution Equations}
+In this chapter, we will study the linear PDEs that involves time. We call such PDE \textbf{evolution equations}. Now, we study the \textbf{general second-order parabolic and hyperbolic equations} first. In this chapter, \textbf{the Fourier transform} and \textbf{the semigroup techniques} provide alternative approaches.
+\section{The space $H^{-1}(U)$}
+In this short section, we will introduce the definition and some basic properties of the Sobolev space $H^{-1}(U)$. 
+\begin{definition}
+    We denote by $H^{-1}(U)$ the dual space to $H_{0}^{1}(U)$.
+\end{definition}
+In other words, $f$ belongs to $H^{-1}(U)$ provided $f$ is a bounded linear functional on $H_{0}^{1}(U)$. In fact, $H_{0}^{1}(U)$ isn't reflexive, and we have:
+\begin{equation}
+    H_{0}^{1}(U)\subset L^{2}(U)\subset H^{-1}(U).
+\end{equation}
+We write $\innerprod{\cdot}{\cdot}$ to denote the pairing between $H^{-1}(U)$ and $H_{0}^{1}(U)$.
+\begin{definition}
+    If $f\in H^{-1}(U)$, we define the norm 
+    \begin{equation}
+        \norm{f}_{H^{-1}(U)}:=\sup\left\{\innerprod{f}{u}|u\in H_{0}^{1}(U),\norm{u}_{H_{0}^{1}(U)}\le 1\right\}.
+    \end{equation}
+\end{definition}
+Then, we will introduce the characterizations of $H^{-1}(U)$.
+\begin{theorem}[characterization of $H^{-1}$]
+\begin{itemize}
+    \item Assume $f\in H^{-1}(U)$, there exist functions $f^{0},f^{1},\cdots,f^{n}$ in $L^{2}(U)$ such that 
+    \begin{equation}
+        \innerprod{f}{v}=\int_{U}f^{0}v+\sum_{i=1}^{n}f^{i}v_{x_{i}}\dif x.
+    \end{equation}
+    \item Furthermore,
+    \begin{equation}
+        \norm{f}_{H^{-1}(U)}=\inf\left\{\left(\int_{U}\sum_{i=0}^{n}|f^{i}|^{2}\dif x\right)^{\frac{1}{2}}\right\}.
+    \end{equation}
+    \item In particular, we have
+    \begin{equation}
+        (v,u)_{L^{2}(U)}=\innerprod{v}{u}
+    \end{equation}
+    for all $u\in H_{0}^{1}(U)$, $v\in L^{2}(U)\subset H^{-1}(U)$.
+\end{itemize}
+\end{theorem}
+\section{Second-order Parabolic Equations}
+Second-order parabolic PDEs are natural generalizations of the heat equations. We will study the existence and uniqueness of appropriately defined weak solutions, their smoothness and other properties.
+\subsection{Definitions}
+\subsubsection{Parabolic equations}
+In this chapter, we assume $U$ to be an open bounded subset of $\mathbb{R}^{n}$ and $U_{T}:=U\times(0,T]$ for some fixed time $T>0$.
+
+Consider the initial/boundary-value problem:
+\begin{equation}
+    \label{eq:Parabolic_IBVP}
+    \left\{
+        \begin{aligned}
+            u_{t}+Lu&=f,x\in U_{T};\\
+            u&=0,x\in \partial U\times[0,T];\\
+            u&=g,x\in U\times\{t=0\}.
+        \end{aligned}
+    \right.
+\end{equation}
+where $f:U_{T}\rightarrow\mathbb{R}$ and $g:U\rightarrow\mathbb{R}$ are given and $u:\bar{U_{T}}\rightarrow\mathbb{R}$ is the unknown. The operator $L$ is the elliptic operator related to time parameter $t$ as divergence form \eqref{eq:div-form_ellip} or non-divergence form \eqref{eq:non_div-form_ellip}, with the uniformly parabolic condition.
+\begin{definition}[Uniformly parabolic]
+    We say that the partial differential operator $\pdfFrac{}{t}+L$ is uniformly parabolic if there exists a constant $\theta>0$ such that 
+    \begin{equation}
+        \sum_{i,j=1}^{n}a^{ij}(x,t)\xi_{i}\xi_{j}\ge \theta|\xi|^{2}
+    \end{equation}
+    for all $(x,t)\in U_{T}$, $\xi\in\mathbb{R}^{n}$.
+\end{definition}
+In physical terms, the second-order term $\sum a^{ij}u_{i}u_{j}$ represents \textbf{diffusion}, the first-order term $\sum b^{i}u_{i}$ represents \textbf{transport}, and the zeroth-order term $cu$ represents \textbf{creation}.
+\subsubsection{Weak solutions}
+Now, we consider the operator $L$ has the divergence form , and:
+\begin{equation}
+    \label{eq:weak_sol_conditions}
+    \begin{aligned}
+        &a^{ij},b^{i},c\in L^{\infty}(U_{T}),\\
+        &f\in L^{2}(U_{T}),\\
+        &g\in L^{2}(U).\\
+    \end{aligned}
+\end{equation}
+We will always suppose $a^{ij}=a^{ji}$.
+
+First, we temporarily suppose that $u(x,t)$ is a smooth function on $U_{T}$. Define a series of function $\mathbf{u}:[0,T]\rightarrow H_{0}^{1}(U)$ as 
+\begin{equation}
+    [\mathbf{u}(t)](x)=u(x,t).
+\end{equation}
+and a series $\mathbf{f}:[0,T]\rightarrow L^{2}(U)$ as:
+\begin{equation}
+    [\mathbf{f}(t)](x):=f(x,t).
+\end{equation}
+Now, choose a fixed function $v\in H_{0}^{1}(U)$, multiply the PDE $\pdfFrac{u}{t}+Lu=f$ by $v$ and integrate by parts, define the bilinear form 
+\begin{equation}
+    \label{eq:bilinear_for_parabolic}
+    B[u,v;t]:=\int_{U}\left(\sum_{i,j=1}^{n}a^{ij}(\cdot,t)u_{i}v_{j}+\sum_{i=1}^{n}b^{i}(\cdot,t)u_{i}v+cuv\right)\dif x,
+\end{equation}
+we can see that 
+\begin{equation}
+    \label{eq:variation_form}
+    (\mathbf{u}',v)+B[\mathbf{u},v;t]=(\mathbf{f},v)
+\end{equation}
+\textbf{for each }$0\le t\le T$. The pairing $(\cdot,\cdot)$ denoting the inner product in $L^{2}(U)$.
+
+Then, by \eqref{eq:Parabolic_IBVP}, we can see:
+\begin{equation}
+    u_{t}=g^{0}+\sum_{j=1}^{n}g_{x_{j}}^{j},x\in U_{T}
+\end{equation}
+for $g^{0}:=f-\sum_{i=1}^{n}b^{i}u_{x_{i}}-cu$ and $g^{j}:=\sum_{i=1}^{n}a^{ij}u_{x_{i}}$. By the definition of $\norm{\cdot}_{H^{-1}(U)}$, we can see:
+\begin{equation}
+    \norm{u_{t}}_{H^{-1}(U)}\le\left(\sum_{j=0}^{n}\norm{g^{j}}_{L^{2}(U)}^{2}\right)^{\frac{1}{2}}\le C\left(\norm{u}_{H_{0}^{1}(U)}+\norm{f}_{L^{2}(U)}\right).
+\end{equation}
+So, it's reasonable to demand $u_{t}\in H^{-1}(U)$. In the case where $u$ smooth on $U_{T}$, we observe that $u_{t}(\tau)\in L^{2}(U)$. Consequently, the term $(\mathbf{u}',v)$ in equation \eqref{eq:variation_form} can be generally expressed as $\innerprod{\mathbf{u}'}{v}$ on $H_{0}^{1}(U)$. From this, we can derive the definition of a weak solution.
+\begin{definition}[Weak Solution]
+    \label{defn:weak_sol_for_parabolic}
+    We say a function 
+    \begin{equation}
+        \mathbf{u}\in L^{2}(0,T;H_{0}^{1}(U)),\mathbf{u}'\in L^{2}(0,T;H^{-1}(U)),
+    \end{equation}
+    is a \textbf{weak solution} of the parabolic initial/boundary value problem \eqref{eq:Parabolic_IBVP} provided 
+    \begin{equation}
+        \label{eq:variation_func}
+        \innerprod{\mathbf{u}'}{v}+B[\mathbf{u},v;t]=(\mathbf{f},v)
+    \end{equation}
+    for each $v\in H_{0}^{1}(U)$ and a.e. time $0\le t\le T$ and $\mathbf{u}(0)=g$.
+\end{definition}
+\begin{remark}
+    The space $L^{2}(0,T;H_{0}^{1}(U))$ means that:
+    \begin{itemize}
+        \item $\forall t\in [0,T]$, $\mathbf{u}(t)\in H_{0}^{1}(U)$.
+        \item Mark $f(t):=\norm{\mathbf{u}(t)}_{H_{0}^{1}(U)}$, then $f(t)\in L^{2}(0,T)$.
+    \end{itemize}
+\end{remark}
+\subsection{Existence and Uniqueness}
+In this section, we will discuss the \textbf{existence} and \textbf{uniqueness} of weak solutions. In Chapter 1, we explored the well-posedness of elliptic equations through the analysis of compact operators. Here, our focus shifts to evolution equations. As the parameter $t$ varies, we select finite-dimensional subspaces $V_{i}$ to approximate the functional space $H_{0}^{1}(U)$. We then seek the approximated solution on $V_{i}$ and take the limit, employing the method known as \textbf{Galerkin approximations}.
+\subsubsection{Galerkin approximations}
+For the parabolic problem \eqref{eq:Parabolic_IBVP}, we construct the solutions of certain finite-dimensional approximations first. More precisely, by theorem \ref{thm:eig_val_of_sym_op}, if we choose the set of eigenfunctions $\{w_{k}(x)\}$ for the operator $L=-\Delta$, then $\{w_{k}\}_{k=1}^{\infty}$ forms an orthogonal basis of $H_{0}^{1}(U)$, and $\{w_{k}\}_{k=1}^{\infty}$ forms an orthonormal basis of $L^{2}(U)$.
+
+Now, fix $m\in\mathbb{N}^{+}$, we will look for a function $\mathbf{u}_{m}:[0,T]\rightarrow H_{0}^{1}(U)$ with the form:
+\begin{equation}
+    \label{eq:finite_dim_approx}
+    \mathbf{u}_{m}(t):=\sum_{k=1}^{m}d_{m}^{k}(t)w_{k},
+\end{equation}
+by the definition \ref{defn:weak_sol_for_parabolic}, the finite dimensional approximation $d_{m}^{k}(t)$ satisfies:
+\begin{itemize}
+    \item 
+    \begin{equation}
+        \label{eq:bdry_value}
+        d_{m}^{k}(0)=(g,w_{k}).
+    \end{equation}
+    \item 
+    \begin{equation}
+        \label{eq:main_function}
+        (\mathbf{u}'_{m},w_{k})+B[\mathbf{u}_{m},w_{k};t]=(\mathbf{f},w_{k}).    
+    \end{equation}
+\end{itemize}
+In fact, equation \eqref{eq:bdry_value} is obtained from the boundary value $\mathbf{u}(0) = g$. On the subspace $V_{k}$, we can observe that $(\mathbf{u}_{m}(0),w_{k}) = d_{m}^{k}(0) = (g, w_{k})$. Equation \eqref{eq:main_function} is derived from \eqref{eq:variation_func} by replacing $v$ with $w_{k}$. Thus, the function $\mathbf{u}_{m}(t)$ is the \textbf{projection} of the solution $\mathbf{u}$ onto the subspace $\text{span}\{w_{1},\cdots,w_{m}\}$.
+\begin{theorem}[Construction of approximate solutions]
+    For each integer $m=1,2,\cdots$ there exists a unique function $\mathbf{u}_{m}$ of the form \eqref{eq:finite_dim_approx} satisfying \eqref{eq:bdry_value} and \eqref{eq:main_function}.
+\end{theorem}
+\begin{proof}
+    By the definition of $\mathbf{u}_{m}$, we can see:
+    \begin{equation}
+        \label{eq:ode_left}
+        (\mathbf{u}'_{m},w_{k})=d_{m}^{k\;'}(t)
+    \end{equation}
+    and 
+    \begin{equation}
+        \label{eq:ode_right}
+        B[\mathbf{u}_{m},w_{k};t]=\sum_{l=1}^{m}B[w_{l},w_{k};t]d_{m}^{l}(t).
+    \end{equation}
+    Now we get an ODE system:
+    \begin{equation}
+        \label{eq:ode}
+        d_{m}^{k\;'}(t)=\sum_{l=1}^{m}B[w_{l},w_{k};t]d_{m}^{l}(t),
+    \end{equation}
+    with the initial values
+    \begin{equation}
+        \label{eq:ode_init_val}
+        d_{m}^{k}(0)=(g,w_{k}).
+    \end{equation}
+    By the standard existence theory for ODEs, the equation \eqref{eq:ode} equipped with initial value \eqref{eq:ode_init_val} has unique solution $d_{m}^{k}(t)$. Then we can see the solution $\mathbf{u}_{m}$ exists and unique.
+\end{proof}
+\subsubsection{Energy estimates}
+In this section, we need some uniform estimates for the $L^{2}$ norm of $\mathbf{u}_{m}$. It's just the \textbf{energy estimates} for parabolic equation.
+\begin{theorem}[Energy estimates]
+    There exists a constant $C$, depending only on $U,T$ and the coefficients of $L$, such that:
+    \begin{equation}
+        \label{eq:energy_estimate}
+        \max_{0\le t\le T}\norm{\mathbf{u}_{m}(t)}_{L^{2}(U)}+\norm{\mathbf{u}_{m}}_{L^{2}(0,T;H_{0}^{1}(U))}+\norm{\mathbf{u}'_{m}}_{L^{2}(0,T;H^{-1}(U))}\le C\left(\norm{\mathbf{f}}_{L^{2}(0,T;L^{2}(U))}+\norm{g}_{L^{2}(U)}\right).
+    \end{equation}
+\end{theorem}
